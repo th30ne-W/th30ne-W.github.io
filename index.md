@@ -3,6 +3,8 @@ layout: default
 title: Home
 ---
 
-# Welcome to My Site
+# Your Name 
 
-This is the homepage of my custom Jekyll theme.
+## Your Catchy Headline (e.g., "Empowering IT Solutions through Expertise")
+
+A concise and impactful introduction highlighting your skills and passion for IT. 

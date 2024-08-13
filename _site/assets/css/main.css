@@ -1,0 +1,73 @@
+/* General Styling */
+body {
+    font-family: sans-serif; /* Choose a clean sans-serif font */
+    margin: 0;
+    padding: 0;
+    line-height: 1.6; /* Improve readability with comfortable line spacing */
+    color: #333;     /* Dark gray text for good contrast */
+    background-color: #f5f5f5; /* Light gray background */
+}
+
+.container {
+    max-width: 800px; /* Limit the main content width for better readability */
+    margin: 2rem auto; /* Center the content horizontally */
+    padding: 0 1rem;  /* Add some padding for visual breathing room */
+}
+
+/* Header Styling */
+header {
+    background-color: #fff; /* White background for the header */
+    padding: 1rem 0;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+nav ul {
+    list-style: none; /* Remove bullet points from the navigation list */
+    margin: 0;
+    padding: 0;
+    text-align: center; /* Center the navigation links */
+}
+
+nav li {
+    display: inline; /* Display navigation items horizontally */
+    margin: 0 1rem;   /* Add spacing between navigation items */
+}
+
+nav a {
+    text-decoration: none; /* Remove underlines from links */
+    color: #333;        /* Dark gray link color */
+}
+
+/* Typography */
+h1, h2 {
+    font-weight: 600; /* Slightly bolder headings */
+}
+
+/* Hero Section */
+.hero {
+    text-align: center; /* Center the content in the hero section */
+    padding: 4rem 0;     /* Add top and bottom padding for visual breathing room */
+  }
+  
+  .hero h1 {
+    font-size: 2.5rem;  /* Make the main heading larger */
+    margin-bottom: 1rem;
+  }
+  
+  .hero p {
+    font-size: 1.2rem; /* Slightly larger paragraph text */
+    max-width: 600px;   /* Limit the paragraph width for better readability */
+    margin: 0 auto;     /* Center the paragraph horizontally */
+  }
+  
+  /* Section Styling */
+  section {
+    margin-bottom: 3rem; /* Add spacing between sections */
+  }
+  
+  section h2 {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid #eee; /* Add a subtle line under section headings */
+    padding-bottom: 0.5rem;
+  }
