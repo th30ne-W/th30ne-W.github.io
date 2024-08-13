@@ -8,7 +8,7 @@ const numberOfElements = 200; // Set to the desired number of elements
 for (let i = 0; i < numberOfElements; i++) { 
   const number = document.createElement('div');
   number.classList.add('number');
-  number.textContent = Math.random() < 0.5 ? '0' : '1'; // Generate only "0" or "1"
+  number.textContent = Math.random() < 0.5 ? '0' : '1'; // Generate only "0" and "1"
 
   // Random initial position
   number.style.left = `${Math.random() * 100}%`;
