@@ -1,14 +1,13 @@
-// Get the background animation container
 const backgroundAnimation = document.getElementById('background-animation');
 
 // Increase the number of elements generated
-const numberOfElements = 200; // Set to the desired number of elements
+const numberOfElements = 500; // Set to the desired number of elements
 
 // Create the number elements
 for (let i = 0; i < numberOfElements; i++) { 
   const number = document.createElement('div');
   number.classList.add('number');
-  number.textContent = Math.random() < 0.5 ? '0' : '1'; // Generate only "0" and "1"
+  number.textContent = Math.random() < 0.5 ? '0' : '1'; // Generate only "0" or "1"
 
   // Random initial position
   number.style.left = `${Math.random() * 100}%`;
@@ -34,30 +33,38 @@ backgroundAnimation.addEventListener('mousemove', (event) => {
 // Animation loop
 function animate() {
     const numbers = document.querySelectorAll('.number');
-  
+
     numbers.forEach(number => {
       let x = parseFloat(number.style.left); 
       let y = parseFloat(number.style.top); 
       let dy = parseFloat(number.dataset.dy); 
-  
+
       // Mouse interaction
       const distance = Math.sqrt(Math.pow(mouseX - x, 2) + Math.pow(mouseY - y, 2));
       const maxDistance = 10; // Small evasion distance
       const evasionRadius = 1.5; // Small evasion radius
       let dx = 0; // No horizontal movement by default
-  
+
       if (distance < maxDistance) {
         const angle = Math.atan2(y - mouseY, x - mouseX);
         const evasionX = Math.cos(angle) * evasionRadius;
-  
+
         // Slightly adjust dx to just miss the mouse pointer horizontally
         dx += evasionX / 10;
+
+        // Brighten the number as the mouse gets closer
+        number.style.opacity = 1;
+        number.style.color = '#B2FF59'; // Lighter color, like a bright green
+      } else {
+        // Return to default state when the mouse is far
+        number.style.opacity = 0.8;
+        number.style.color = '#03A062';
       }
-  
+
       // Apply only downward movement (dy)
       y += dy;
       x += dx; // Apply horizontal evasion only when necessary
-  
+
       // Wrap around if number goes offscreen (vertically only)
       if (y > 100) {
         y = -10;
@@ -65,13 +72,13 @@ function animate() {
         x = Math.random() * 100;
         number.dataset.dy = 0.1 + Math.random() * 0.2; // Reset to a slow downward speed
       }
-  
+
       number.style.left = `${x}%`;
       number.style.top = `${y}%`;
     });
-  
+
     requestAnimationFrame(animate);
 }
-  
+
 // Start the animation
 animate();

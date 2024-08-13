@@ -100,8 +100,9 @@ padding-bottom: 0.5rem;
 
 .number {
   position: absolute;
-  font-size: 1.5rem; /* Adjust as needed */
-  color: #00ff00; /* Or your desired color */
-  font-family: monospace; /* For a matrix-like effect */
-  opacity: 0.8; /* Slight transparency for a subtle effect */
+  font-size: 1.3rem; /* Smaller numbers */
+  color: #00ff00; /* Default color */
+  font-family: monospace; /* Matrix-like effect */
+  opacity: 0.8; /* Slight transparency */
+  transition: opacity 0.2s ease-in-out, color 0.2s ease-in-out; /* Smooth transition for brightness */
 }
