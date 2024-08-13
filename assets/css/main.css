@@ -6,9 +6,8 @@ body {
   line-height: 1.6; 
   color: #f0f0f0; 
   background-color: #282c34; 
-  /*background-image: url('../images/background.png');  Adjust path as needed */
+  background-image: url('../images/background.png');  /* Adjust path as needed */
   background-repeat: repeat;
-  z-index: 1;
 }
 
 .container {
@@ -16,11 +15,13 @@ body {
   margin: 2rem auto; 
   padding: 0 1rem;  
   color: #f0f0f0;
+  position: relative;
+  z-index: 1;
 }
 
 /* Header Styling */
 header {
-  background-color: #626c7f; 
+  background-color: #0c120b; 
   padding: 1rem 0;
   color: #f0f0f0; 
 }
@@ -43,7 +44,7 @@ nav a {
 }
 
 nav a:hover {
-color: #61dafb; 
+color: #00ff00; 
 }
 
 /* Typography */
@@ -99,7 +100,8 @@ padding-bottom: 0.5rem;
 
 .number {
   position: absolute;
-  font-size: 2rem; /* Adjust as needed */
-  color: #03A062; /* Or your desired color */
-  /* ... other styles ... */
+  font-size: 1.5rem; /* Adjust as needed */
+  color: #00ff00; /* Or your desired color */
+  font-family: monospace; /* For a matrix-like effect */
+  opacity: 0.7; /* Slight transparency for a subtle effect */
 }

@@ -2,13 +2,13 @@
 const backgroundAnimation = document.getElementById('background-animation');
 
 // Increase the number of elements generated
-const numberOfElements = 150; // Set to the desired number of elements
+const numberOfElements = 200; // Set to the desired number of elements
 
 // Create the number elements
 for (let i = 0; i < numberOfElements; i++) { 
   const number = document.createElement('div');
   number.classList.add('number');
-  number.textContent = Math.floor(Math.random() * 10); 
+  number.textContent = Math.random() < 0.5 ? '0' : '1'; // Generate only "0" or "1"
 
   // Random initial position
   number.style.left = `${Math.random() * 100}%`;
