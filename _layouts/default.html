@@ -5,14 +5,20 @@
     <link rel="stylesheet" href="/assets/css/main.css"> 
 </head>
 <body>
-    <div id="background-animation"></div>
-    {% include header.html %}
-
-    <div class="container">
-        {{ content }}
+    <div id="background-animation"></div> <!-- Background animation element -->
+  
+    <div id="event-layer"></div> <!-- Transparent layer for capturing events -->
+  
+    <div class="main-content"> <!-- Main content wrapper -->
+      {% include header.html %}
+  
+      <div class="container">
+        <div class="content-column">
+          {{ content }}
+        </div>
+      </div>
     </div>
-
-    <script src="/assets/js/scripts.js"></script>
-</body>
+  
+    <script src="/assets/js/scripts.js"></script> <!-- Ensure this points to your script -->
+</body>  
 </html>
-

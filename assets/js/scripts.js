@@ -23,8 +23,8 @@ for (let i = 0; i < numberOfElements; i++) {
 let mouseX = 0;
 let mouseY = 0;
 
-// Add event listener for mousemove
-backgroundAnimation.addEventListener('mousemove', (event) => {
+// Add event listener for mousemove on the window to capture all mouse movements
+window.addEventListener('mousemove', (event) => {
   const rect = backgroundAnimation.getBoundingClientRect();
   mouseX = (event.clientX - rect.left) / rect.width * 100; // Adjust for container offset and convert to percentage
   mouseY = (event.clientY - rect.top) / rect.height * 100;

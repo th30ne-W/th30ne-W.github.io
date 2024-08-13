@@ -1,4 +1,10 @@
 /* General Styling */
+
+.main-content {
+  position: relative;
+  z-index: 2; /* Keep content above the event layer */
+}
+
 body {
   font-family: sans-serif; 
   margin: 0;
@@ -7,7 +13,7 @@ body {
   color: #f0f0f0; 
   background-color: #282c34; 
   background-image: url('../images/backgroundmatrix.png');  /* Adjust path as needed */
-  background-repeat: repeat;
+  /* background-repeat: repeat; */
 }
 
 .container {
@@ -16,7 +22,18 @@ body {
   padding: 0 1rem;  
   color: #f0f0f0;
   position: relative;
-  z-index: 1;
+  display: flex;           /* Use flexbox for layout */
+  justify-content: center; /* Center the content horizontally */
+  align-items: center;     /* Center the content vertically */
+  min-height: 100vh;        /* Ensure the container takes up full viewport height */
+}
+
+.content-column {
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black background */
+  padding: 2rem;                         /* Add padding for visual breathing room */
+  border-radius: 10px;                   /* Add rounded corners */
+  text-align: center;                    /* Center the text within the column */
+  max-width: 600px;                      /* Limit the column width for better readability */
 }
 
 /* Header Styling */
@@ -89,7 +106,7 @@ padding-bottom: 0.5rem;
 }
 
 #background-animation {
-  position: fixed; /* or absolute, depending on your layout */
+  position: fixed; /* Keep it fixed in the background */
   top: 0;
   left: 0;
   width: 100%;
@@ -97,7 +114,6 @@ padding-bottom: 0.5rem;
   z-index: -1; /* Place it behind other content */
   overflow: hidden; /* Hide any numbers that move outside the container */
 }
-
 .number {
   position: absolute;
   font-size: 1.3rem; /* Smaller numbers */
@@ -105,4 +121,14 @@ padding-bottom: 0.5rem;
   font-family: monospace; /* Matrix-like effect */
   opacity: 0.8; /* Slight transparency */
   transition: opacity 0.2s ease-in-out, color 0.2s ease-in-out; /* Smooth transition for brightness */
+}
+
+#event-layer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1; /* Above the content, but invisible */
+  pointer-events: none; /* This element itself does not block events */
 }
