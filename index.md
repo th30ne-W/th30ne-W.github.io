@@ -1,11 +1,12 @@
 ---
 layout: default
-title: Hompage
+title: Home
 ---
 
 # William Nunes
 
-## Harnessing Python’s Magic, Weaving Automated Spells in the Realm of IT.
+![My Photo](/assets/images/will-1.jpeg)
 
-For years, I've wielded Python’s arcane power, crafting automated spells that transform the digital landscape. 
-In the realm of IT, I conjure solutions with precision, making the complex appear effortless.
+## Harnessing Python's power, Crafting Automation Solutions in the IT Realm
+
+I'm an IT specialist who loves wielding Python to create automations that bring order to the digital World. It's all about making tech work smarter, not harder—and having a blast along the way.

@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html>
+
 <head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet">
     <title>{{ page.title }} | {{ site.title }}</title>
     <link rel="stylesheet" href="/assets/css/main.css"> 
 </head>
@@ -14,11 +18,14 @@
   
       <div class="container">
         <div class="content-column">
-          {{ content }}
+            <div class="hero">
+                    {{ content }}
+            </div>
         </div>
       </div>
     </div>
-  
+    
     <script src="/assets/js/scripts.js"></script> <!-- Ensure this points to your script -->
 </body>  
 </html>
+
