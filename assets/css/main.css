@@ -1,89 +1,86 @@
 /* General Styling */
 
-.main-content {
-  position: relative;
-  z-index: 2; /* Keep content above the event layer */
-  flex: 1;
-}
-
 body {
-  font-family: 'Orbitron', monospace; 
+  font-family: 'Orbitron', monospace;
   margin: 0;
   padding: 0;
-  line-height: 1.6; 
-  color: #f0f0f0; 
-  background-color: #000000; 
-  background-image: url('../images/backgroundmatrix.png');  /* Adjust path as needed */
-  background-size: cover; /* Cover the entire area without repeating */
-  background-repeat: no-repeat; /* Prevent the image from repeating */
-  background-position: center; /* Center the image */
-  height: 100vh; /* Ensure the body takes up the full viewport height */
-  overflow-y: auto; 
-  padding-bottom: 50px; /* Add space for the footer */
+  line-height: 1.6;
+  color: #f0f0f0;
+  background-color: #282c34;
+  background-image: url('../images/backgroundmatrix.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Ensure the body takes up full viewport height */
   box-sizing: border-box;
-  justify-content: space-between; /* Ensure footer stays at the bottom */
+}
+
+.main-content {
+  position: relative;
+  z-index: 2; 
+  flex: 1 0 auto; /* Allow main content to grow and push footer down */
 }
 
 .container {
-  max-width: 800px; 
-  margin: 1rem auto; /* Adjust margins for better centering */
-  padding: 0 1rem;  
+  max-width: 800px;
+  margin: 2rem auto; 
+  padding: 0 1rem;
   color: #f0f0f0;
   position: relative;
-  display: flex;           /* Use flexbox for layout */
-  justify-content: center; /* Center the content horizontally */
-  align-items: center;     /* Center the content vertically */
-  min-height: calc(100vh - 4rem); /* Adjust to make sure it takes up the full height */
-  padding-bottom: 50px; /* Prevents content from overlapping with the footer */
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .content-column {
-  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black background */
-  padding: 1.5rem;                         /* Adjust padding for visual balance */
-  border-radius: 10px;                   /* Add rounded corners */
-  text-align: center;                    /* Center the text within the column */
-  max-width: 600px;                      /* Limit the column width for better readability */
-  margin: 0 auto;                        /* Ensure it is centered within the container */
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 1.5rem;
+  border-radius: 10px;
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto;
 }
 
 /* Header Styling */
 header {
-  background-color: #0c120b; 
+  background-color: #0c120b;
   padding: 1rem 0;
-  color: #f0f0f0; 
+  color: #f0f0f0;
 }
 
 nav ul {
-  list-style: none; 
+  list-style: none;
   margin: 0;
   padding: 0;
-  text-align: center; 
+  text-align: center;
 }
 
 nav li {
-  display: inline; 
-  margin: 0 1rem;   
+  display: inline;
+  margin: 0 1rem;
 }
 
 nav a {
-  text-decoration: none; 
-  color: #f0f0f0;        
+  text-decoration: none;
+  color: #f0f0f0;
 }
 
 nav a:hover {
-  color: #00ff00; 
+  color: #00ff00;
+  text-decoration: underline;
 }
 
 footer {
-  text-align: center;  /* Center the footer content */
-  padding: 1rem 0;      /* Add some padding */
-  font-size: 0.9rem;    /* Slightly smaller font size */
-  color: #c0c0c0;       /* Light gray text color */
-  /* Optionally, add a border-top or other styling to visually separate the footer */
+  text-align: center;
+  padding: 1rem 0;
+  font-size: 0.9rem;
+  color: #c0c0c0;
 }
 
 footer a {
-  color: #00ff00;      /* Use your accent color for links */
+  color: #00ff00;
   text-decoration: none;
 }
 
@@ -93,22 +90,22 @@ footer a:hover {
 
 /* Typography */
 h1, h2 {
-  font-weight: 600; 
+  font-weight: 600;
 }
 
 /* Hero Section */
 .hero {
   display: flex;
   align-items: center;
-  justify-content: center; /* Center content horizontally */
-  padding: 2rem 0; /* Add more padding to balance space at the top and bottom */
+  justify-content: center;
+  padding: 2rem 0;
   text-align: left;
-  flex-wrap: wrap; /* Ensure the text and image can wrap on smaller screens */
-  margin: 0 auto;  /* Ensure the hero section is centered */
+  flex-wrap: wrap;
+  margin: 0 auto;
 }
 
 .hero h1 {
-  font-size: 2.5rem; /* Adjusted size for better balance */
+  font-size: 2.5rem;
   margin: 0;
   color: #fff;
   font-family: 'Orbitron', monospace;
@@ -117,66 +114,66 @@ h1, h2 {
 .hero-content {
   display: flex;
   flex-direction: column;
-  max-width: 500px; /* Reduce the width of the content column */
-  margin: 0 auto; /* Center the content */
+  max-width: 500px;
+  margin: 0 auto;
 }
 
 .hero img {
-  border-radius: 50%; /* Circular image */
-  width: 200px; /* Set the width */
-  height: 200px; /* Set the height to keep it perfectly circular */
-  margin-left: 20px; /* Space between the image and the text */
-  margin-right: 20px; /* Ensure space between the image and the name */
-  flex-shrink: 0; /* Prevent the image from shrinking */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add a subtle shadow for depth */
+  border-radius: 50%;
+  width: 200px;
+  height: 200px;
+  margin-left: 20px;
+  margin-right: 20px;
+  flex-shrink: 0;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .hero p {
-  font-size: 1.1rem; /* Adjust paragraph size for readability */
+  font-size: 1.1rem;
   color: #f0f0f0;
-  line-height: 1.6; /* Improve line spacing */
-  max-width: 500px; /* Reduce the width of the paragraph */
+  line-height: 1.6;
+  max-width: 500px;
   font-family: 'Open Sans', monospace;
 }
 
 .hero h2 {
-  font-size: 1.6rem; /* Slightly reduce subheading size */
+  font-size: 1.6rem;
   color: #c0c0c0;
-  margin-top: 0.5rem; /* Add a small top margin */
+  margin-top: 0.5rem;
   margin-bottom: 1.5rem;
   font-family: 'Open Sans', monospace;
 }
 
 /* Section Styling */
 section {
-  margin-bottom: 3rem; 
+  margin-bottom: 3rem;
 }
 
 section h2 {
   font-size: 1.8rem;
   margin-bottom: 1.5rem;
-  border-bottom: 1px solid #eee; 
+  border-bottom: 1px solid #eee;
   padding-bottom: 0.5rem;
 }
 
 /* Background Animation */
 #background-animation {
-  position: fixed; /* Keep it fixed in the background */
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: -1; /* Place it behind other content */
-  overflow: hidden; /* Hide any numbers that move outside the container */
+  z-index: -1;
+  overflow: hidden;
 }
 
 .number {
   position: absolute;
-  font-size: 1.3rem; /* Smaller numbers */
-  color: #00ff00; /* Default color */
-  font-family: monospace; /* Matrix-like effect */
-  opacity: 0.8; /* Slight transparency */
-  transition: opacity 0.2s ease-in-out, color 0.2s ease-in-out; /* Smooth transition for brightness */
+  font-size: 1.3rem;
+  color: #00ff00;
+  font-family: monospace;
+  opacity: 0.8;
+  transition: opacity 0.2s ease-in-out, color 0.2s ease-in-out;
 }
 
 /* Event Layer */
@@ -186,6 +183,6 @@ section h2 {
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: 1; /* Above the content, but invisible */
-  pointer-events: none; /* This element itself does not block events */
+  z-index: 1;
+  pointer-events: none;
 }
