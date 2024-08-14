@@ -1,16 +1,19 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Ensures proper scaling on mobile -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet">
     <title>{{ page.title }} | {{ site.title }}</title>
     <link rel="stylesheet" href="/assets/css/main.css"> 
 </head>
+
 <body>
     <div id="background-animation"></div> <!-- Background animation element -->
-  
+
     <div id="event-layer"></div> <!-- Transparent layer for capturing events -->
   
     <div class="main-content"> <!-- Main content wrapper -->
@@ -19,7 +22,7 @@
       <div class="container">
         <div class="content-column">
             <div class="hero">
-                    {{ content }}
+                {{ content }}
             </div>
         </div>
       </div>
@@ -27,5 +30,5 @@
     
     <script src="/assets/js/scripts.js"></script> <!-- Ensure this points to your script -->
 </body>  
-</html>
 
+</html>

@@ -22,22 +22,22 @@ body {
 
 .container {
   max-width: 800px; 
-  margin: 2rem auto; 
+  margin: 1.5rem auto; /* Slightly reduce margin for a tighter layout */
   padding: 0 1rem;  
   color: #f0f0f0;
   position: relative;
   display: flex;           /* Use flexbox for layout */
   justify-content: center; /* Center the content horizontally */
   align-items: center;     /* Center the content vertically */
-  min-height: calc(100vh - 4rem); /* Adjust based on your header/footer size */
+  min-height: 80vh; /* Reduce min-height for better balance */
 }
 
 .content-column {
   background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black background */
-  padding: 2rem;                         /* Add padding for visual breathing room */
-  border-radius: 10px;                   /* Add rounded corners */
-  text-align: center;                    /* Center the text within the column */
-  max-width: 600px;                      /* Limit the column width for better readability */
+  padding: 1.5rem; /* Reduce padding for a tighter layout */
+  border-radius: 10px; /* Add rounded corners */
+  text-align: center; /* Center the text within the column */
+  max-width: 600px; /* Limit the column width for better readability */
 }
 
 /* Header Styling */
@@ -65,7 +65,7 @@ nav a {
 }
 
 nav a:hover {
-color: #00ff00; 
+  color: #00ff00; 
 }
 
 /* Typography */
@@ -78,13 +78,13 @@ h1, h2 {
   display: flex;
   align-items: center;
   justify-content: center; /* Center content horizontally */
-  padding: 2rem 0; /* Adjust padding for better spacing */
+  padding: 3rem 0; /* Adjust padding for better spacing */
   text-align: left;
   flex-wrap: wrap; /* Ensure the text and image can wrap on smaller screens */
 }
 
 .hero h1 {
-  font-size: 3rem; /* Increase size for a more prominent name */
+  font-size: 2.5rem; /* Adjusted size for better balance */
   margin: 0;
   color: #fff;
   font-family: 'Orbitron', monospace;
@@ -93,12 +93,13 @@ h1, h2 {
 .hero-content {
   display: flex;
   flex-direction: column;
+  max-width: 500px; /* Reduce the width of the content column */
 }
 
 .hero img {
   border-radius: 50%; /* Circular image */
-  width: 175px; /* Slightly increase the image size */
-  height: 175px;
+  width: 150px; /* Set the width */
+  height: 150px; /* Set the height to keep it perfectly circular */
   margin-left: 20px; /* Space between the image and the text */
   margin-right: 20px; /* Ensure space between the image and the name */
   flex-shrink: 0; /* Prevent the image from shrinking */
@@ -106,15 +107,15 @@ h1, h2 {
 }
 
 .hero p {
-  font-size: 1.25rem; /* Increase paragraph size for readability */
+  font-size: 1.1rem; /* Adjust paragraph size for readability */
   color: #f0f0f0;
-  max-width: 700px; /* Limit the width for better readability */
-  font-family: 'Open Sans', monospace;
   line-height: 1.6; /* Improve line spacing */
+  max-width: 500px; /* Reduce the width of the paragraph */
+  font-family: 'Open Sans', monospace;
 }
 
 .hero h2 {
-  font-size: 1.8rem; /* Slightly increase subheading size */
+  font-size: 1.6rem; /* Slightly reduce subheading size */
   color: #c0c0c0;
   margin-top: 0.5rem; /* Add a small top margin */
   margin-bottom: 1.5rem;
@@ -123,16 +124,17 @@ h1, h2 {
 
 /* Section Styling */
 section {
-margin-bottom: 3rem; 
+  margin-bottom: 3rem; 
 }
 
 section h2 {
-font-size: 1.8rem;
-margin-bottom: 1.5rem;
-border-bottom: 1px solid #eee; 
-padding-bottom: 0.5rem;
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid #eee; 
+  padding-bottom: 0.5rem;
 }
 
+/* Background Animation */
 #background-animation {
   position: fixed; /* Keep it fixed in the background */
   top: 0;
@@ -142,6 +144,7 @@ padding-bottom: 0.5rem;
   z-index: -1; /* Place it behind other content */
   overflow: hidden; /* Hide any numbers that move outside the container */
 }
+
 .number {
   position: absolute;
   font-size: 1.3rem; /* Smaller numbers */
@@ -151,6 +154,7 @@ padding-bottom: 0.5rem;
   transition: opacity 0.2s ease-in-out, color 0.2s ease-in-out; /* Smooth transition for brightness */
 }
 
+/* Event Layer */
 #event-layer {
   position: fixed;
   top: 0;
