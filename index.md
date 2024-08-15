@@ -5,7 +5,7 @@ title: Home
 
 # William Nunes
 
-![My Photo](/assets/images/will2.jpg)
+![A photo of William Nunes](/assets/images/will2.jpg)
 
 ## Harnessing Python's power, Crafting Automation Solutions in the IT Realm
 

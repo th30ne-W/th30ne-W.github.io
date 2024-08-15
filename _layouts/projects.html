@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron&family=Open+Sans&display=swap" rel="stylesheet">
+  <title>{{ page.title }} | {{ site.title }}</title>
+  <link rel="stylesheet" href="/assets/css/main.css">
+</head>
+
+<body>
+  <div id="background-animation"></div>
+  <div id="event-layer"></div>
+
+  <div class="main-content">
+    {% include header.html %}
+
+    <div class="projects-container">
+      {% assign projects = page.content | split: '## ' %}
+      
+      <!-- Extract and display the main title -->
+      {% assign main_title = projects[0] | split: '\n' | first %}
+      <h1 class="page-title">{{ main_title | markdownify }}</h1>
+
+      <div class="projects-grid">
+        {% for project in projects offset:1 %}
+          {% assign project_lines = project | newline_to_br | split: '<br />' %}
+          {% assign project_title = project_lines[0] %}
+          {% assign project_description = project_lines[1] %}
+          {% assign project_tags = project_lines[2] %}
+          {% assign project_url = project_lines[3] | strip_newlines | strip %}
+          {% if project_title != '' %}
+            <div class="project-bubble">
+              {% if project_url contains 'http' %}
+                <a href="{{ project_url }}" class="project-bubble-link" target="_blank">
+                  <div class="project-content">
+                    <h2 class="project-title">{{ project_title | markdownify | strip_html }}</h2>
+                    <p class="project-description">{{ project_description | markdownify | strip_html }}</p>
+                    <p class="project-tags">{{ project_tags }}</p>
+                  </div>
+                </a>
+              {% else %}
+                <div class="project-content">
+                  <h2 class="project-title">{{ project_title | markdownify | strip_html }}</h2>
+                  <p class="project-description">{{ project_description | markdownify | strip_html }}</p>
+                  <p class="project-tags">{{ project_tags }}</p>
+                </div>
+              {% endif %}
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+            
+
+    {% include footer.html %}
+  </div>
+
+  <script src="/assets/js/scripts.js"></script>
+</body>
+
+</html>

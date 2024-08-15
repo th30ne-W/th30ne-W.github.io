@@ -13,25 +13,29 @@ body {
   background-position: center;
   display: flex;
   flex-direction: column;
-  min-height: 100vh; /* Ensure the body takes up full viewport height */
+  min-height: 100vh;
   box-sizing: border-box;
 }
 
 .main-content {
   position: relative;
-  z-index: 2; 
+  z-index: 2;
   flex: 1 0 auto; /* Allow main content to grow and push footer down */
 }
 
 .container {
   max-width: 800px;
-  margin: 2rem auto; 
+  margin: 2rem auto;
   padding: 0 1rem;
-  color: #f0f0f0;
-  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.projects-container {
+  max-width: 66%;
+  margin: 2rem auto;
+  padding: 0 1rem;
 }
 
 .content-column {
@@ -40,14 +44,12 @@ body {
   border-radius: 10px;
   text-align: center;
   max-width: 600px;
-  margin: 0 auto;
 }
 
 /* Header Styling */
 header {
   background-color: #0c120b;
   padding: 1rem 0;
-  color: #f0f0f0;
 }
 
 nav ul {
@@ -65,6 +67,7 @@ nav li {
 nav a {
   text-decoration: none;
   color: #f0f0f0;
+  transition: color 0.3s ease;
 }
 
 nav a:hover {
@@ -72,20 +75,22 @@ nav a:hover {
   text-decoration: underline;
 }
 
+/* Footer Styling */
 footer {
   text-align: center;
   padding: 1rem 0;
   font-size: 0.9rem;
-  color: #c0c0c0;
 }
 
 footer a {
-  color: #00ff00;
+  color: #f0f0f0;
   text-decoration: none;
+  transition: color 0.3s ease;
 }
 
 footer a:hover {
   text-decoration: underline;
+  color: #00ff00;
 }
 
 /* Typography */
@@ -99,32 +104,21 @@ h1, h2 {
   align-items: center;
   justify-content: center;
   padding: 2rem 0;
-  text-align: left;
+  text-align: center;
   flex-wrap: wrap;
-  margin: 0 auto;
 }
 
 .hero h1 {
   font-size: 2.5rem;
   margin: 0;
   color: #fff;
-  font-family: 'Orbitron', monospace;
-}
-
-.hero-content {
-  display: flex;
-  flex-direction: column;
-  max-width: 500px;
-  margin: 0 auto;
 }
 
 .hero img {
   border-radius: 50%;
   width: 200px;
   height: 200px;
-  margin-left: 20px;
-  margin-right: 20px;
-  flex-shrink: 0;
+  margin: 0 20px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
@@ -139,16 +133,10 @@ h1, h2 {
 .hero h2 {
   font-size: 1.6rem;
   color: #c0c0c0;
-  margin-top: 0.5rem;
-  margin-bottom: 1.5rem;
-  font-family: 'Open Sans', monospace;
+  margin: 0.5rem 0 1.5rem;
 }
 
 /* Section Styling */
-section {
-  margin-bottom: 3rem;
-}
-
 section h2 {
   font-size: 1.8rem;
   margin-bottom: 1.5rem;
@@ -185,4 +173,78 @@ section h2 {
   height: 100%;
   z-index: 1;
   pointer-events: none;
+}
+
+/* Project Bubbles */
+.projects-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center; /* Center the bubbles within the container */
+  align-items: flex-start; /* Align bubbles to the top */
+  padding: 2rem;
+}
+
+.project-bubble {
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #f0f0f0;
+  padding: 1rem;
+  border-radius: 20px;
+  text-align: center;
+  text-decoration: none;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  flex: 1 1 calc(33.333% - 20px); /* Flex grow and shrink with a third of the container width */
+  max-width: calc(33.333% - 20px); /* Ensure bubbles don’t exceed a third of the container */
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.project-bubble:hover {
+  background-color: rgba(0, 0, 0, 0.7);
+  transform: scale(1.05);
+}
+
+/* Project Title Styling */
+.project-title {
+  font-size: 1.6rem;
+  margin-bottom: 0.5rem;
+  color: #00ff00; /* Bright green for standout effect */
+  font-family: 'Orbitron', monospace;
+  text-transform: uppercase; /* Make the title uppercase */
+}
+
+/* Project Description Styling */
+.project-description {
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  color: #f0f0f0; /* Standard white color */
+  font-family: 'Open Sans', sans-serif; /* Different font from the title */
+  line-height: 1.6; /* Increased line height for better readability */
+}
+
+/* Project Tags Styling */
+.project-tags {
+  font-size: 0.85rem;
+  color: #03A062; /* Green for the tags */
+  font-weight: bold;
+  font-family: 'Orbitron', sans-serif; /* Same font as the description */
+  display: block; /* Ensure tags are on their own line */
+  margin-top: 0.5rem;
+}
+
+/* Additional Responsiveness */
+@media (max-width: 768px) {
+  .project-bubble {
+    flex: 1 1 100%; /* Take full width on smaller screens */
+    max-width: 100%;
+  }
+}
+
+.project-bubble-link {
+  display: block;  /* Ensures the link takes up the full bubble */
+  text-decoration: none;  /* Removes underline from link */
+  color: inherit;  /* Inherits color from parent to avoid default link color */
 }

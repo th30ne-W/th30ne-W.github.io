@@ -1,2 +1,5 @@
 title: William Nunes homepage
 description: This is my personal page! ;)
+collections:
+  projects:
+    output: true
