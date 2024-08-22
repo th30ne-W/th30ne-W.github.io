@@ -17,6 +17,10 @@ body {
   box-sizing: border-box;
 }
 
+.p {
+  font-family: 'Open Sans', monospace;
+}
+
 .main-content {
   position: relative;
   z-index: 2;
@@ -34,8 +38,15 @@ body {
 
 .projects-container {
   max-width: 66%;
-  margin: 2rem auto;
+  margin: 2rem auto 2rem calc((100% - 66%) / 2); /* Adjust margin to align with bubbles */
   padding: 0 1rem;
+}
+
+.projects-container h1 {
+  font-size: 2.5rem; /* Match with About Me */
+  color: #ffffff; /* White for better contrast */
+  text-align: left; /* Align to the left */
+  font-family: 'Orbitron', monospace;
 }
 
 .content-column {
@@ -48,15 +59,31 @@ body {
 
 /* Header Styling */
 header {
-  background-color: #0c120b;
+  background-color: rgba(0, 0, 0, 0.5);
   padding: 1rem 0;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
+}
+
+/* Matrix Code Effect */
+header::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('../images/matrix-code.gif') repeat;
+  opacity: 0.2;
+  z-index: -1;
 }
 
 nav ul {
+  display: flex;
+  flex-direction: column;
   list-style: none;
-  margin: 0;
   padding: 0;
-  text-align: center;
+  margin: 0;
+  gap: 1rem; /* Space between links */
 }
 
 nav li {
@@ -64,15 +91,66 @@ nav li {
   margin: 0 1rem;
 }
 
+/* Neon Glowing Text */
+
+/* Vertical Navigation */
+
+nav {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 1rem;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+
+
 nav a {
+  color: #00ff00;
   text-decoration: none;
-  color: #f0f0f0;
-  transition: color 0.3s ease;
+  font-size: 1.2rem;
+  position: relative;
+  padding: 0.5rem 0;
+}
+
+nav a:hover::before,
+nav a.active::before {
+    visibility: visible;
+    transform: scaleY(1);
+}
+
+nav a::before {
+  content: '';
+  position: absolute;
+  width: 2px;
+  height: 100%;
+  left: -5px;
+  top: 0;
+  background-color: #00ff00;
+  visibility: hidden;
+  transform: scaleY(0);
+  transition: all 0.3s ease-in-out;
+}
+
+nav a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -2px; /* Position line slightly below the text */
+  width: 0;
+  height: 2px;
+  background-color: #00ff00;
+  transition: width 0.3s ease-in-out; /* Animate the line from left to right */
+}
+
+nav a:hover::after, nav a.active::after {
+  width: 100%; /* Expand the line on hover or when active */
 }
 
 nav a:hover {
   color: #00ff00;
-  text-decoration: underline;
+  text-shadow: 0 0 20px rgba(0, 255, 0, 1), 0 0 30px rgba(0, 255, 0, 1), 0 0 40px rgba(0, 255, 0, 1);
 }
 
 /* Footer Styling */
@@ -176,40 +254,38 @@ section h2 {
 }
 
 /* Project Bubbles */
+/* Projects Grid - Fake Masonry Layout */
 .projects-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  justify-content: center; /* Center the bubbles within the container */
-  align-items: flex-start; /* Align bubbles to the top */
+  column-width: 300px;
+  column-gap: 50px;
   padding: 2rem;
 }
 
+/* Project Bubble Styling */
 .project-bubble {
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.6);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   color: #f0f0f0;
   padding: 1rem;
   border-radius: 20px;
   text-align: center;
   text-decoration: none;
+  display: inline-block; /* Ensures bubbles respect column layout */
+  width: 100%; /* Make sure bubbles fill the column width */
+  margin-bottom: 20px;
   transition: background-color 0.3s ease, transform 0.2s ease;
-  flex: 1 1 calc(33.333% - 20px); /* Flex grow and shrink with a third of the container width */
-  max-width: calc(33.333% - 20px); /* Ensure bubbles don’t exceed a third of the container */
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .project-bubble:hover {
-  background-color: rgba(0, 0, 0, 0.7);
-  transform: scale(1.05);
+  background-color: rgba(0, 0, 0, 0.8);
+  transform: scale(1.07);
+  border: 2px solid #00ff00;
 }
 
 /* Project Title Styling */
 .project-title {
-  font-size: 1.6rem;
+  font-size: 1.5rem;
   margin-bottom: 0.5rem;
   color: #00ff00; /* Bright green for standout effect */
   font-family: 'Orbitron', monospace;
@@ -222,7 +298,7 @@ section h2 {
   margin-bottom: 1rem;
   color: #f0f0f0; /* Standard white color */
   font-family: 'Open Sans', sans-serif; /* Different font from the title */
-  line-height: 1.6; /* Increased line height for better readability */
+  line-height: 1.8; /* Increased line height for better readability */
 }
 
 /* Project Tags Styling */
@@ -233,6 +309,7 @@ section h2 {
   font-family: 'Orbitron', sans-serif; /* Same font as the description */
   display: block; /* Ensure tags are on their own line */
   margin-top: 0.5rem;
+  line-height: 1.8;
 }
 
 /* Additional Responsiveness */
@@ -248,3 +325,127 @@ section h2 {
   text-decoration: none;  /* Removes underline from link */
   color: inherit;  /* Inherits color from parent to avoid default link color */
 }
+
+@media (max-width: 768px) {
+  .projects-grid {
+    column-width: 100%;
+  }
+  .project-bubble {
+    margin-right: 0;
+  }
+}
+
+/* About Me Page Styling */
+.about-section {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 2rem;
+  color: #f0f0f0;
+}
+
+.about-intro {
+  text-align: left;
+  margin-bottom: 2rem;
+}
+
+.about-intro h1 {
+  font-size: 2.5rem;
+  color: #ffffff; /* White for better contrast */
+  font-family: 'Orbitron', monospace; /* Orbitron for the title */
+}
+
+.about-intro p {
+  font-size: 1.2rem;
+  line-height: 1.8;
+  font-family: 'Open Sans', sans-serif; /* Open Sans for the text */
+}
+
+/* Skill Bar Container */
+.skills-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.skills-section, .other-skills-section {
+  flex: 1;
+  padding: 1rem;
+  border-radius: 10px;
+}
+
+.skills-section h2, .other-skills-section h2 {
+  font-size: 1.8rem;
+  color: #00ff00;
+  border-bottom: 2px solid #00ff00;
+  padding-bottom: 0.5rem;
+  margin-bottom: 1rem;
+  font-family: 'Orbitron', monospace;
+}
+
+/* Skill Bar Styling */
+
+.skill-bar {
+  display: block;
+  height: 1rem;
+  background-color: rgba(0, 0, 0, 0.3);
+  margin-top: 0.5rem;
+  margin-bottom: 1.5rem;
+  position: relative;
+  width: 0; /* Initial width for animation */
+  background-color: #00ff00;
+  transition: width 2s ease-out; /* Smooth transition */
+}
+
+.skill-bar::after {
+  content: attr(data-percentage);
+  color: #ffffff; /* White color for better visibility */
+  position: absolute;
+  right: 3px;  /* Position the percentage near the end of the bar */
+  top: 0;  /* Align the percentage vertically within the bar */
+  font-size: 0.8rem;  /* Adjust font size if needed */
+  font-weight: bold;  /* Make the text bold */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 1); /* Add a subtle shadow for better contrast */
+}
+
+.experience-section {
+  padding: 1rem;
+  border-radius: 10px;
+}
+
+.experience-section h2 {
+  font-size: 1.8rem;
+  color: #00ff00;
+  border-bottom: 2px solid #00ff00;
+  padding-bottom: 0.5rem;
+  margin-bottom: 1rem;
+  font-family: 'Orbitron', monospace; /* Orbitron for the section headers */
+}
+
+.timeline-item {
+  border-left: 3px solid #00ff00;
+  padding-left: 1rem;
+  margin-left: 2rem;
+}
+
+.timeline-item h3 {
+  font-size: 1.5rem;
+  color: #00ff00;
+  margin-bottom: 0.5rem;
+  font-family: 'Orbitron', monospace; /* Orbitron for timeline item headers */
+}
+
+.timeline-item p {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  margin-top: 0.5rem;
+  font-family: 'Open Sans', sans-serif; /* Open Sans for the text */
+}
+
+/* General Section Styling */
+section {
+  margin-bottom: 3rem;
+  background-color: rgba(0, 0, 0, 0.5); /* Dark overlay for all sections */
+  padding: 2rem;
+  border-radius: 10px;
+}
+

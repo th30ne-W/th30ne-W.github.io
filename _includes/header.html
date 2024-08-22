@@ -1,10 +1,10 @@
 <header>
     <nav>
         <ul>
-            <li><a href="{{ site.baseurl }}/">Home</a></li>
-            <li><a href="{{ site.baseurl }}/about">About</a></li>
-            <li><a href="{{ site.baseurl }}/projects">Projects</a></li>
-            <li><a href="{{ site.baseurl }}/resume">Resume</a></li> 
+            <li><a href="{{ site.baseurl }}/" class="{% if page.url == '/' %}active{% endif %}">Home</a></li>
+            <li><a href="{{ site.baseurl }}/aboutme/" class="{% if page.url contains 'aboutme' %}active{% endif %}">About</a></li>
+            <li><a href="{{ site.baseurl }}/projects/" class="{% if page.url contains 'projects' %}active{% endif %}">Projects</a></li>
+            <li><a href="{{ site.baseurl }}/resume/" class="{% if page.url contains 'resume' %}active{% endif %}">Resume</a></li>
         </ul>
     </nav>
 </header>

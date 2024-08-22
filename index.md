@@ -1,6 +1,6 @@
 ---
-layout: default
-title: Home
+layout: index
+title: Home Page
 ---
 
 # William Nunes

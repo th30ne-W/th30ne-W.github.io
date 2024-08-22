@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="William Nunes - Harnessing Python's Power, Crafting Automation Solutions in the IT Realm">
+    <meta name="keywords" content="William Nunes, Python, IT Specialist, Automation, Digital Solutions">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Ensures proper scaling on mobile -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet">
+    <title>{{ page.title }} | {{ site.title }}</title>
+    <link rel="stylesheet" href="/assets/css/main.css"> 
+</head>
+
+<body>
+    <div id="background-animation"></div> <!-- Background animation element -->
+
+    <div id="event-layer"></div> <!-- Transparent layer for capturing events -->
+
+    <main class="main-content"> <!-- Changed from div to main for better accessibility -->
+        {% include header.html %}
+        <div class="container">
+            <div class="content-column">
+                <div class="hero">
+                    {{ content }}
+                </div>
+            </div>
+        </div>
+        {% include footer.html %} <!-- Include the footer here inside the main-content -->
+    </main>
+ 
+    <script src="/assets/js/scripts.js"></script> <!-- Ensure this points to your script -->
+</body> 
+</html>

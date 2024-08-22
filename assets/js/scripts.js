@@ -82,3 +82,13 @@ function animate() {
 
 // Start the animation
 animate();
+
+document.addEventListener("DOMContentLoaded", function() {
+  const skillBars = document.querySelectorAll('.skill-bar');
+
+  skillBars.forEach(bar => {
+      const percentage = bar.getAttribute('data-percentage');
+      bar.style.width = percentage;
+  });
+});
+
