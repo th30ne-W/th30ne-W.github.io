@@ -449,3 +449,25 @@ section {
   border-radius: 10px;
 }
 
+
+/* Resume Page Styling */
+.resume-section h1 {
+  text-align: center;
+  color: #ffffff;
+}
+
+.resume-section h2 {
+  font-size: 1.8rem;
+  color: #00ff00;
+  border-bottom: 2px solid #00ff00;
+  padding-bottom: 0.5rem;
+  margin-top: 2rem;
+  font-family: 'Orbitron', monospace;
+}
+
+.resume-section ul {
+  list-style-type: disc;
+  margin-left: 2rem;
+  font-family: 'Open Sans', sans-serif;
+}
+
