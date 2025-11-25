@@ -1,0 +1,32 @@
+---
+layout: default
+---
+<section class="hero">
+  <div class="hero__content">
+    <p class="eyebrow">{{ site.subtitle }}</p>
+    <h1 class="hero__title">{{ site.title }}</h1>
+    <p class="hero__lede">{{ page.lede }}</p>
+    <div class="hero__actions">
+      <a class="button" href="{{ '/projects/' | relative_url }}">View projects</a>
+      <a class="button button--ghost" href="{{ '/about/' | relative_url }}">More about me</a>
+    </div>
+  </div>
+  <figure class="hero__image">
+    <img src="{{ page.image | default: site.image | relative_url }}" alt="Portrait of {{ site.title }}">
+  </figure>
+</section>
+
+<section class="feature-grid">
+  <article class="feature-card">
+    <h2>Automation-first mindset</h2>
+    <p>I build reliable tooling that shrinks repetitive IT tasks into consistent, versioned workflows.</p>
+  </article>
+  <article class="feature-card">
+    <h2>Systems you can trust</h2>
+    <p>From SaaS administration to endpoint rollouts, I focus on observability and maintainability.</p>
+  </article>
+  <article class="feature-card">
+    <h2>Python everywhere</h2>
+    <p>APIs, CLIs, and integrations are my comfort zone—documented, tested, and ready to extend.</p>
+  </article>
+</section>
