@@ -236,7 +236,7 @@ a {
 
 .page-title {
   margin: 0 0 0.75rem;
-  font-size: clamp(1.8rem, 1vw + 1.6rem, 2.5rem);
+  font-size: clamp(1.8rem, calc(1vw + 1.6rem), 2.5rem);
 }
 
 .page-intro {
