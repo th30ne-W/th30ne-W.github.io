@@ -1,14 +1,29 @@
-- title: Rude Rick CLI
-  description: A Python command-line tool that queries the Rick and Morty API with typed prompts and caching for repeat lookups.
-  tags: [Python, CLI, API]
+- title: Rick and Morty CLI
+  description: Python Command-line interface application that interacts with the Rick and Morty API and let's users to search for characters from the Rick and Morty series.
+  tags: "#Python #Automation #IT"
   url: https://github.com/th30ne-W/Rude-Rick-CLI
 
-- title: SaaS Provisioning Toolkit
-  description: Automation scripts to standardize onboarding across identity, messaging, and device management platforms.
-  tags: [Automation, IT Ops, Python]
-  url: https://github.com/th30ne-W
+- title: Another Cool Project
+  description: Python Command-line interface application that interacts with the Rick and Morty API and let's users to search for characters from the Rick and Morty series.
+  tags: "#Python #Automation #IT"
+  url: https://github.com/th30ne-W/Rude-Rick-CLI
 
-- title: Endpoint Health Dashboard
-  description: Lightweight monitoring that surfaces patch levels and compliance signals for managed devices.
-  tags: [Observability, Dashboards]
-  url: https://github.com/th30ne-W
+- title: Another Cool Project
+  description: Python Command-line interface application that interacts with the Rick and Morty API and let's users to search for characters from the Rick and Morty series.
+  tags: "#Python #Automation #IT"
+  url: https://github.com/th30ne-W/Rude-Rick-CLI
+
+- title: Another Cool Project
+  description: Python Command-line interface application that interacts with the Rick and Morty API and let's users to search for characters from the Rick and Morty series.
+  tags: "#Python #Automation #IT"
+  url: https://github.com/th30ne-W/Rude-Rick-CLI
+
+- title: Another Cool Project
+  description: Python Command-line interface application that interacts with the Rick and Morty API and let's users to search for characters from the Rick and Morty series.
+  tags: "#Python #Automation #IT"
+  url: https://github.com/th30ne-W/Rude-Rick-CLI
+
+- title: Another Cool Project
+  description: Python Command-line interface application that interacts with the Rick and Morty API and let's users to search for characters from the Rick and Morty series.
+  tags: "#Python #Automation #IT"
+  url: https://github.com/th30ne-W/Rude-Rick-CLI

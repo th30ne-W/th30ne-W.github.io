@@ -1,10 +1,27 @@
 ---
-layout: page
-title: Projects
-intro: A short selection of automation and integration work I enjoyed building.
+layout: default
 ---
-<div class="projects-grid">
-  {% for project in site.data.projects %}
-    {% include project-card.html project=project %}
-  {% endfor %}
+<div class="projects-container">
+  <h1 class="page-title">Projects</h1>
+
+  <div class="projects-grid">
+    {% for project in site.data.projects %}
+    <div class="project-bubble">
+      <div class="project-header">
+        <h2 class="project-title">{{ project.title }}</h2>
+      </div>
+
+      <div class="project-body">
+        <p class="project-description">{{ project.description }}</p>
+      </div>
+
+      <div class="project-footer">
+        <p class="project-tags">{{ project.tags }}</p>
+        {% if project.url %}
+        <a href="{{ project.url }}" class="project-link" target="_blank">View Project</a>
+        {% endif %}
+      </div>
+    </div>
+    {% endfor %}
+  </div>
 </div>
