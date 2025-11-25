@@ -1,94 +1,109 @@
-const backgroundAnimation = document.getElementById('background-animation');
+const canvas = document.getElementById('background-animation');
+const ctx = canvas.getContext('2d');
 
-// Increase the number of elements generated
-const numberOfElements = 500; // Set to the desired number of elements
+let width, height;
+let columns;
+const fontSize = 16; // Slightly larger for better visibility of characters
+const drops = [];
 
-// Create the number elements
-for (let i = 0; i < numberOfElements; i++) { 
-  const number = document.createElement('div');
-  number.classList.add('number');
-  number.textContent = Math.random() < 0.5 ? '0' : '1'; // Generate only "0" or "1"
+// Katakana, Latin, and Numbers
+const katakana = 'アァカサタナハマヤャラワガザダバパイィキシチニヒミリヰギジヂビピウゥクスツヌフムユュルグズブヅプエェケセテネヘメレヱゲゼデベペオォコソトノホモヨョロヲゴゾドボポヴッン';
+const latin = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+const nums = '0123456789';
+const alphabet = katakana + latin + nums;
 
-  // Random initial position
-  number.style.left = `${Math.random() * 100}%`;
-  number.style.top = `${Math.random() * 100}%`;
+// Initialize or reset the animation state
+function init() {
+    width = canvas.width = window.innerWidth;
+    height = canvas.height = window.innerHeight;
+    columns = Math.floor(width / fontSize);
 
-  // Set a constant downward speed
-  number.dataset.dy = 0.1 + Math.random() * 0.2; // Slow downward speed
-
-  backgroundAnimation.appendChild(number);
+    // Initialize drops if array is empty or size changed significantly
+    if (drops.length !== columns) {
+        drops.length = 0;
+        for (let i = 0; i < columns; i++) {
+            drops[i] = Math.floor(Math.random() * -100); // Start at random positions above
+        }
+    }
 }
 
-// Store mouse coordinates
-let mouseX = 0;
-let mouseY = 0;
+window.addEventListener('resize', init);
+init();
 
-// Add event listener for mousemove on the window to capture all mouse movements
-window.addEventListener('mousemove', (event) => {
-  const rect = backgroundAnimation.getBoundingClientRect();
-  mouseX = (event.clientX - rect.left) / rect.width * 100; // Adjust for container offset and convert to percentage
-  mouseY = (event.clientY - rect.top) / rect.height * 100;
+// Mouse interaction
+let mouseX = -1000;
+let mouseY = -1000;
+
+window.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
 });
 
-// Animation loop
-function animate() {
-    const numbers = document.querySelectorAll('.number');
+let frameCount = 0;
 
-    numbers.forEach(number => {
-      let x = parseFloat(number.style.left); 
-      let y = parseFloat(number.style.top); 
-      let dy = parseFloat(number.dataset.dy); 
+function draw() {
+    // Reset shadow properties to prevent "blinking" bug on the background clear
+    ctx.shadowBlur = 0;
+    ctx.shadowColor = 'transparent';
 
-      // Mouse interaction
-      const distance = Math.sqrt(Math.pow(mouseX - x, 2) + Math.pow(mouseY - y, 2));
-      const maxDistance = 10; // Small evasion distance
-      const evasionRadius = 1.5; // Small evasion radius
-      let dx = 0; // No horizontal movement by default
+    // Semi-transparent black to create trail effect
+    // Lower alpha = longer trails = "fuller" rain
+    ctx.fillStyle = 'rgba(0, 0, 0, 0.02)';
+    ctx.fillRect(0, 0, width, height);
 
-      if (distance < maxDistance) {
-        const angle = Math.atan2(y - mouseY, x - mouseX);
-        const evasionX = Math.cos(angle) * evasionRadius;
+    ctx.font = fontSize + 'px monospace';
 
-        // Slightly adjust dx to just miss the mouse pointer horizontally
-        dx += evasionX / 10;
+    // Slow down the animation by updating only every 4th frame (half speed of previous)
+    frameCount++;
+    if (frameCount % 4 !== 0) {
+        requestAnimationFrame(draw);
+        return;
+    }
 
-        // Brighten the number as the mouse gets closer
-        number.style.opacity = 1;
-        number.style.color = '#B2FF59'; // Lighter color, like a bright green
-      } else {
-        // Return to default state when the mouse is far
-        number.style.opacity = 0.8;
-        number.style.color = '#03A062';
-      }
+    for (let i = 0; i < drops.length; i++) {
+        const text = alphabet.charAt(Math.floor(Math.random() * alphabet.length));
+        const x = i * fontSize;
+        const y = drops[i] * fontSize;
 
-      // Apply only downward movement (dy)
-      y += dy;
-      x += dx; // Apply horizontal evasion only when necessary
+        // Mouse interaction: brighten characters near mouse
+        const dist = Math.hypot(x - mouseX, y - mouseY);
+        if (dist < 150) {
+            ctx.fillStyle = '#B2FF59'; // Brighter green
+            // Removed shadowBlur to prevent artifacts
+        } else {
+            ctx.fillStyle = '#03A062'; // Matrix green
+        }
 
-      // Wrap around if number goes offscreen (vertically only)
-      if (y > 100) {
-        y = -10;
-        // Optionally reset to a new random position when wrapping
-        x = Math.random() * 100;
-        number.dataset.dy = 0.1 + Math.random() * 0.2; // Reset to a slow downward speed
-      }
+        ctx.fillText(text, x, y);
 
-      number.style.left = `${x}%`;
-      number.style.top = `${y}%`;
-    });
+        // Reset drop to top randomly
+        // Lower threshold = more frequent resets = "fuller" rain
+        if (y > height && Math.random() > 0.95) {
+            drops[i] = 0;
+        }
 
-    requestAnimationFrame(animate);
+        drops[i]++;
+    }
+
+    requestAnimationFrame(draw);
 }
 
-// Start the animation
-animate();
+// Check for reduced motion preference
+const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+if (!mediaQuery.matches) {
+    draw();
+}
 
-document.addEventListener("DOMContentLoaded", function() {
-  const skillBars = document.querySelectorAll('.skill-bar');
+// Skill bars animation
+document.addEventListener("DOMContentLoaded", function () {
+    const skillBars = document.querySelectorAll('.skill-bar');
 
-  skillBars.forEach(bar => {
-      const percentage = bar.getAttribute('data-percentage');
-      bar.style.width = percentage;
-  });
+    skillBars.forEach(bar => {
+        const percentage = bar.getAttribute('data-percentage');
+        // Add a small delay for visual effect
+        setTimeout(() => {
+            bar.style.width = percentage;
+        }, 500);
+    });
 });
 
