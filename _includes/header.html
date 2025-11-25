@@ -1,11 +1,16 @@
-<header>
-    <nav>
-        <ul>
-            <li><a href="{{ site.baseurl }}/" class="{% if page.url == '/' %}active{% endif %}">Home</a></li>
-            <li><a href="{{ site.baseurl }}/aboutme"
-                    class="{% if page.url contains 'aboutme' %}active{% endif %}">About</a></li>
-            <li><a href="{{ site.baseurl }}/projects"
-                    class="{% if page.url contains 'projects' %}active{% endif %}">Projects</a></li>
-        </ul>
+<header class="site-header">
+  <div class="site-header__inner">
+    <a class="brand" href="{{ '/' | relative_url }}">{{ site.title }}</a>
+    <nav class="site-nav" aria-label="Primary navigation">
+      <ul class="site-nav__list">
+        {% for item in site.nav %}
+          {% assign index_url = item.url | append: 'index.html' %}
+          {% assign is_current = page.url == item.url or page.url == index_url %}
+          <li class="site-nav__item">
+            <a class="site-nav__link{% if is_current %} is-active{% endif %}" href="{{ item.url | relative_url }}">{{ item.title }}</a>
+          </li>
+        {% endfor %}
+      </ul>
     </nav>
+  </div>
 </header>

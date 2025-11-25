@@ -1,4 +1,46 @@
-title: William Nunes homepage
-description: This is my personal page! ;)
+title: William Nunes
+subtitle: Automating IT with Python
+email: will.nunes@proton.me
+description: Personal site for William Nunes showcasing automation-focused IT work.
+url: "https://th30ne-w.github.io"
 baseurl: ""
-url: ""
+image: /assets/images/will2.jpg
+markdown: kramdown
+permalink: pretty
+collections:
+  posts:
+    output: true
+sass:
+  style: expanded
+  load_paths:
+    - _sass
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor/bundle
+  - README.md
+  - tmp
+  - bin
+  - package.json
+  - package-lock.json
+defaults:
+  - scope:
+      path: ""
+      type: "pages"
+    values:
+      layout: page
+      image: /assets/images/will2.jpg
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: post
+plugins: []
+nav:
+  - title: Home
+    url: /
+  - title: About
+    url: /about/
+  - title: Projects
+    url: /projects/
