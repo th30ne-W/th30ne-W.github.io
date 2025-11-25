@@ -147,11 +147,11 @@ a {
   font-size: 0.85rem;
 }
 
-.hero__title {
-  margin: 0;
-  font-size: clamp(2rem, 3vw + 1rem, 3rem);
-  letter-spacing: -0.03em;
-}
+  .hero__title {
+    margin: 0;
+    font-size: clamp(2rem, calc(3vw + 1rem), 3rem);
+    letter-spacing: -0.03em;
+  }
 
 .hero__lede {
   margin: 0;
