@@ -95,7 +95,8 @@ if (!mediaQuery.matches) {
 }
 
 // Skill bars animation
-document.addEventListener("DOMContentLoaded", function () {
+// Skill bars animation
+function initSkillBars() {
     const skillBars = document.querySelectorAll('.skill-bar');
 
     skillBars.forEach(bar => {
@@ -105,4 +106,66 @@ document.addEventListener("DOMContentLoaded", function () {
             bar.style.width = percentage;
         }, 500);
     });
+}
+
+// SPA Navigation to persist background animation
+function initNavigation() {
+    document.addEventListener('click', (e) => {
+        const link = e.target.closest('a');
+        if (!link) return;
+
+        // Ignore external links, anchors, and special schemes
+        if (link.origin !== window.location.origin ||
+            link.getAttribute('href').startsWith('#') ||
+            link.getAttribute('href').startsWith('mailto:') ||
+            link.target === '_blank') {
+            return;
+        }
+
+        e.preventDefault();
+        navigateTo(link.href);
+    });
+
+    window.addEventListener('popstate', () => {
+        navigateTo(window.location.href, false);
+    });
+}
+
+async function navigateTo(url, push = true) {
+    try {
+        const response = await fetch(url);
+        if (!response.ok) throw new Error('Network response was not ok');
+        const html = await response.text();
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(html, 'text/html');
+
+        const newContent = doc.querySelector('.main-content');
+        const currentContent = document.querySelector('.main-content');
+
+        if (newContent && currentContent) {
+            currentContent.innerHTML = newContent.innerHTML;
+            document.title = doc.title;
+
+            if (push) {
+                history.pushState({}, '', url);
+            }
+
+            // Re-initialize page specific scripts
+            initSkillBars();
+
+            // Scroll to top
+            window.scrollTo(0, 0);
+        } else {
+            // Fallback if structure is different
+            window.location.href = url;
+        }
+    } catch (err) {
+        console.error('Navigation failed', err);
+        window.location.href = url;
+    }
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+    initSkillBars();
+    initNavigation();
 });
