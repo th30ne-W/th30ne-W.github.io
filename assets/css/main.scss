@@ -200,6 +200,9 @@ nav a.active::after {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   /* Back to 300px min */
+  grid-auto-rows: auto;
+  align-items: start;
+  /* Let each card define its own height to prevent overlap */
   gap: 3rem;
   /* Increased gap for better separation */
   padding: 1rem;
@@ -211,7 +214,6 @@ nav a.active::after {
   border-radius: 16px;
   /* More rounded for bubble effect */
   padding: 2rem;
-  margin-bottom: 1rem;
   display: flex;
   flex-direction: column;
   height: 100%;
