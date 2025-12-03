@@ -1,0 +1,57 @@
+---
+layout: default
+---
+<section class="about-section">
+  <div class="about-intro">
+    <h1>{{ page.title }}</h1>
+    {% if page.greeting %}
+    <p>{{ page.greeting }}</p>
+    {% endif %}
+    {% if page.summary %}
+    <p>{{ page.summary }}</p>
+    {% endif %}
+  </div>
+
+  <div class="skills-container">
+    <div class="skills-section">
+      <h2>Sys Admin Skills</h2>
+      <ul>
+        {% for skill in page.sys_admin_skills %}
+        <li>{{ skill.name }}<span class="skill-bar" data-percentage="{{ skill.percentage }}"></span></li>
+        {% endfor %}
+      </ul>
+    </div>
+    <div class="other-skills-section">
+      <h2>Other Skills</h2>
+      <ul>
+        {% for skill in page.other_skills %}
+        <li>{{ skill.name }}<span class="skill-bar" data-percentage="{{ skill.percentage }}"></span></li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+
+  <div class="experience-section">
+    <h2>Experience</h2>
+    {% for item in page.experience %}
+    <div class="timeline-item">
+      <h3>{{ item.role }}</h3>
+      <p>{{ item.dates }}</p>
+      <p>{{ item.location }}</p>
+    </div>
+    {% endfor %}
+  </div>
+
+  <div class="experience-section">
+    <h2>Education</h2>
+    {% for item in page.education %}
+    <div class="timeline-item">
+      <h3>{{ item.school }}</h3>
+      <p>{{ item.dates }}</p>
+      {% if item.detail %}
+      <p>{{ item.detail }}</p>
+      {% endif %}
+    </div>
+    {% endfor %}
+  </div>
+</section>

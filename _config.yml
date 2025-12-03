@@ -29,13 +29,13 @@ defaults:
       path: ""
       type: "pages"
     values:
-      layout: page
+      layout: default
       image: /assets/images/will2.jpg
   - scope:
       path: ""
       type: "posts"
     values:
-      layout: post
+      layout: default
 plugins: []
 nav:
   - title: Home

@@ -1,27 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="{{ page.description | default: site.description }}">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron&family=Open+Sans&display=swap" rel="stylesheet">
-    <title>{{ page.title }} | {{ site.title }}</title>
-    <link rel="stylesheet" href="/assets/css/main.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="{{ page.description | default: site.description }}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron&family=Open+Sans&display=swap" rel="stylesheet">
+  <title>{{ page.title }} | {{ site.title }}</title>
+  <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
 </head>
 <body>
-    <canvas id="background-animation"></canvas>
-    <div id="event-layer"></div>
+  <canvas id="background-animation"></canvas>
+  <div id="event-layer"></div>
 
-    <main class="main-content">
-        {% include header.html %}
+  <main class="main-content">
+    {% include header.html %}
 
-        {{ content }}
+    {{ content }}
 
-        {% include footer.html %}
-    </main>
+    {% include footer.html %}
+  </main>
 
-    <script src="/assets/js/scripts.js"></script>
+  <script src="{{ '/assets/js/scripts.js' | relative_url }}"></script>
 </body>
 </html>
