@@ -14,7 +14,7 @@ bundle exec jekyll build              # Production build to _site/
 Use Bundler (`bundle exec ...`) so the pinned Jekyll 3.9 toolchain stays consistent.
 
 ## Coding Style & Naming Conventions
-- HTML/Liquid: 4-space indentation; keep includes lean and reusable. Prefer `{% include %}` or data files over repeated markup.
+- HTML/Liquid: 4-space indentation; keep includes lean and reusable. Prefer include tags (e.g., `{% raw %}{% include header.html %}{% endraw %}`) or data files over repeated markup.
 - Sass: edit `main.scss` (keep variables in `:root`), let the pipeline generate `main.css`. Group related blocks and respect the existing neon theme palette.
 - Content: front matter keys are lowercase with hyphens; titles in Title Case. Data entries in `_data/projects.yml` follow `title`, `description`, `tags`, `url`.
 
