@@ -4,7 +4,7 @@ email: will.nunes@proton.me
 description: Personal site for William Nunes showcasing automation-focused IT work.
 url: "https://th30ne-w.github.io"
 baseurl: ""
-image: /assets/images/will2.jpg
+image: /assets/images/willmatrix.jpg
 markdown: kramdown
 permalink: pretty
 collections:
@@ -30,7 +30,7 @@ defaults:
       type: "pages"
     values:
       layout: default
-      image: /assets/images/will2.jpg
+      image: /assets/images/willmatrix.jpg
   - scope:
       path: ""
       type: "posts"

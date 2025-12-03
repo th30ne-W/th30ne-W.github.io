@@ -7,7 +7,7 @@ description: Personal site for William Nunes showcasing automation-focused IT wo
 
 # William Nunes
 
-![A photo of William Nunes](/assets/images/will2.jpg)
+![A photo of William Nunes](/assets/images/willmatrix.jpg)
 
 ## Harnessing Python's power, crafting automation solutions in the IT realm
 

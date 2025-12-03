@@ -13,6 +13,8 @@
   --font-body: 'Open Sans', sans-serif;
   --spacing-unit: 1.5rem;
   --transition-speed: 0.3s;
+  --header-height: 80px;
+  --footer-height: 120px;
 }
 
 /* General Styling */
@@ -25,7 +27,7 @@ body {
   background-color: var(--bg-color);
   display: flex;
   flex-direction: column;
-  min-height: 100%;
+  min-height: 100vh;
   box-sizing: border-box;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
@@ -57,7 +59,7 @@ a:hover {
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 var(--spacing-unit);
+  padding: calc(var(--header-height) + var(--spacing-unit)) var(--spacing-unit) calc(var(--footer-height) + var(--spacing-unit));
   box-sizing: border-box;
 }
 
@@ -87,8 +89,10 @@ a:hover {
 header {
   background-color: rgba(5, 5, 5, 0.9);
   padding: 1.2rem 0;
-  position: sticky;
+  position: fixed;
   top: 0;
+  left: 0;
+  right: 0;
   z-index: 100;
   backdrop-filter: blur(10px);
   border-bottom: 1px solid rgba(0, 255, 0, 0.1);
@@ -430,7 +434,11 @@ footer {
   padding: 3rem 0;
   font-size: 0.9rem;
   background-color: rgba(5, 5, 5, 0.95);
-  margin-top: auto;
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 90;
   border-top: 1px solid rgba(255, 255, 255, 0.05);
 }
 
@@ -461,6 +469,8 @@ footer a:hover {
 @media (max-width: 768px) {
   :root {
     --spacing-unit: 1rem;
+    --header-height: 72px;
+    --footer-height: 140px;
   }
 
   .hero h1 {
