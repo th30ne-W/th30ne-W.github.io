@@ -1,16 +1,22 @@
 <header>
-  <nav>
-    <ul>
-      {% for item in site.nav %}
-      {% assign item_url = item.url | relative_url %}
-      {% assign is_active = false %}
-      {% if page.url == item.url or page.url == item.url | append: '/' %}
-        {% assign is_active = true %}
-      {% endif %}
-      <li>
-        <a href="{{ item_url }}" class="{% if is_active %}active{% endif %}"{% if is_active %} aria-current="page"{% endif %}>{{ item.title }}</a>
-      </li>
-      {% endfor %}
-    </ul>
-  </nav>
+  <div class="nav-wrapper">
+    <nav>
+      <ul>
+        {% for item in site.nav %}
+        {% assign item_url = item.url | relative_url %}
+        {% assign is_active = false %}
+        {% if page.url == item.url or page.url == item.url | append: '/' %}
+          {% assign is_active = true %}
+        {% endif %}
+        <li>
+          <a href="{{ item_url }}" class="{% if is_active %}active{% endif %}"{% if is_active %} aria-current="page"{% endif %}>{{ item.title }}</a>
+        </li>
+        {% endfor %}
+      </ul>
+    </nav>
+    <button id="theme-toggle" class="theme-toggle" type="button" aria-pressed="false" aria-label="Toggle light and dark mode">
+      <span class="theme-toggle__icon" aria-hidden="true">☾</span>
+      <span class="theme-toggle__label">Dark</span>
+    </button>
+  </div>
 </header>

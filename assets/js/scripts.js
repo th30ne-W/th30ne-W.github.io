@@ -1,13 +1,18 @@
 const canvas = document.getElementById('background-animation');
 const ctx = canvas.getContext('2d');
 
-const chars = 'アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+// Matrix rain characters
+const chars =
+  'アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 const charArray = chars.split('');
 
+// Rain settings
 const fontSize = 22;
 let columns = 0;
 let drops = [];
 let intervalId = null;
+
+// Hover interaction
 let mouseX = -1000;
 let mouseY = -1000;
 let mouseActive = false;
@@ -15,6 +20,14 @@ let lastMouseMove = 0;
 const hoverRadius = 140;
 const openRadius = 160;
 const hoverFadeMs = 800;
+
+// Theme-aware matrix colors
+const matrixColors = {
+  fade: 'rgba(0, 0, 0, 0.1)',
+  base: '#afa',
+  hover: '#B2FF59',
+  glow: 'rgba(0, 255, 138, 0.35)',
+};
 
 function initMatrix() {
   canvas.width = window.innerWidth;
@@ -24,7 +37,7 @@ function initMatrix() {
 }
 
 function drawMatrix() {
-  ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
+  ctx.fillStyle = matrixColors.fade;
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
   ctx.font = `bold ${fontSize}px monospace`;
@@ -40,8 +53,11 @@ function drawMatrix() {
     const dist = Math.hypot(x - mouseX, y - mouseY);
 
     // brighten near pointer
-    ctx.fillStyle = dist < hoverRadius && isHot ? '#B2FF59' : '#afa';
+    ctx.fillStyle = dist < hoverRadius && isHot ? matrixColors.hover : matrixColors.base;
+    ctx.shadowColor = matrixColors.glow;
+    ctx.shadowBlur = 6;
     ctx.fillText(char, x, y);
+    ctx.shadowBlur = 0;
 
     // create a simple "opening" effect by pushing drops away from pointer
     if (isHot && dist < openRadius) {
@@ -62,6 +78,14 @@ function startMatrix() {
   intervalId = setInterval(drawMatrix, 70);
 }
 
+function updateMatrixThemeColors() {
+  const styles = getComputedStyle(document.documentElement);
+  matrixColors.fade = (styles.getPropertyValue('--matrix-fade') || matrixColors.fade).trim();
+  matrixColors.base = (styles.getPropertyValue('--matrix-char') || matrixColors.base).trim();
+  matrixColors.hover = (styles.getPropertyValue('--matrix-char-hover') || matrixColors.hover).trim();
+  matrixColors.glow = (styles.getPropertyValue('--matrix-shadow') || matrixColors.glow).trim();
+}
+
 window.addEventListener('resize', initMatrix);
 window.addEventListener('mousemove', (e) => {
   mouseX = e.clientX;
@@ -73,6 +97,7 @@ window.addEventListener('mousemove', (e) => {
 // Respect reduced motion preference
 const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
 if (!mediaQuery.matches) {
+  updateMatrixThemeColors();
   startMatrix();
 }
 
@@ -133,6 +158,7 @@ async function navigateTo(url, push = true) {
 
       // Re-initialize page specific scripts
       initSkillBars();
+      initThemeToggle();
 
       // Scroll to top
       window.scrollTo(0, 0);
@@ -146,7 +172,58 @@ async function navigateTo(url, push = true) {
   }
 }
 
+function initThemeToggle() {
+  const themeToggle = document.getElementById('theme-toggle');
+  const root = document.documentElement;
+
+  function updateToggleLabel(theme) {
+    if (!themeToggle) return;
+    const isLight = theme === 'light';
+    themeToggle.setAttribute('aria-pressed', isLight);
+    const icon = themeToggle.querySelector('.theme-toggle__icon');
+    const label = themeToggle.querySelector('.theme-toggle__label');
+    if (icon) icon.textContent = isLight ? '☀' : '☾';
+    if (label) label.textContent = isLight ? 'Light' : 'Dark';
+  }
+
+  function applyTheme(theme) {
+    root.setAttribute('data-theme', theme);
+    try {
+      localStorage.setItem('theme', theme);
+    } catch (e) { /* ignore */ }
+    updateMatrixThemeColors();
+    updateToggleLabel(theme);
+    updateHeroImage(theme);
+  }
+
+  if (themeToggle) {
+    const current = root.getAttribute('data-theme') || 'dark';
+    updateToggleLabel(current);
+    updateHeroImage(current);
+    themeToggle.onclick = null;
+    themeToggle.addEventListener('click', () => {
+      const next = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+      applyTheme(next);
+    });
+  } else {
+    updateMatrixThemeColors();
+    updateHeroImage(root.getAttribute('data-theme') || 'dark');
+  }
+}
+
+function updateHeroImage(theme) {
+  const heroImg = document.getElementById('hero-photo');
+  if (!heroImg) return;
+  const lightSrc = heroImg.getAttribute('data-theme-image-light');
+  const darkSrc = heroImg.getAttribute('data-theme-image-dark');
+  const nextSrc = theme === 'light' ? lightSrc || heroImg.getAttribute('src') : darkSrc || heroImg.getAttribute('src');
+  if (nextSrc && heroImg.getAttribute('src') !== nextSrc) {
+    heroImg.setAttribute('src', nextSrc);
+  }
+}
+
 document.addEventListener('DOMContentLoaded', function () {
   initSkillBars();
   initNavigation();
+  initThemeToggle();
 });

@@ -9,6 +9,18 @@
   <link href="https://fonts.googleapis.com/css2?family=Orbitron&family=Open+Sans&display=swap" rel="stylesheet">
   <title>{{ page.title }} | {{ site.title }}</title>
   <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
+  <script>
+    (function () {
+      try {
+        const saved = localStorage.getItem('theme');
+        const initial = saved || 'dark';
+        document.documentElement.setAttribute('data-theme', initial);
+      } catch (e) {
+        /* ignore */
+        document.documentElement.setAttribute('data-theme', 'dark');
+      }
+    })();
+  </script>
 </head>
 <body>
   <canvas id="background-animation"></canvas>

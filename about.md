@@ -1,6 +1,7 @@
 ---
 layout: about
 title: About Me
+display_title: About Me
 permalink: /about/
 description: Learn more about William Nunes, an IT specialist focused on Python automation.
 greeting: "Hi, I am William Nunes."

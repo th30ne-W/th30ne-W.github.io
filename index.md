@@ -5,9 +5,14 @@ permalink: /
 description: Personal site for William Nunes showcasing automation-focused IT work.
 ---
 
-# William Nunes
+# <span class="glow-title">William Nunes</span>
 
-![A photo of William Nunes](/assets/images/willmatrix.jpg)
+<img
+  id="hero-photo"
+  src="/assets/images/willmatrix.jpg"
+  data-theme-image-dark="/assets/images/willmatrix.jpg"
+  data-theme-image-light="/assets/images/willmatrixlight.png"
+  alt="A photo of William Nunes">
 
 ## Harnessing Python's power, crafting automation solutions in the IT realm
 
