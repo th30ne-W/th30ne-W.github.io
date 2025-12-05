@@ -14,6 +14,6 @@ description: Personal site for William Nunes showcasing automation-focused IT wo
   data-theme-image-light="/assets/images/willmatrixlight.png"
   alt="A photo of William Nunes">
 
-## Harnessing Python's power, crafting automation solutions in the IT realm
+## Building the bridge between IT Operations and Engineering.
 
-I'm an IT specialist who loves wielding Python to create automations that bring order to the digital world. It's all about making tech work smarter, not harder, and having a blast along the way.
+Automating identity, infrastructure, and internal workflows at scale
