@@ -32,15 +32,20 @@ layout: default
   </div>
 
   <div class="experience-section">
-    <h2>Experience</h2>
-    {% for item in page.experience %}
+  <h2>Experience</h2>
+  {% for item in page.experience %}
     <div class="timeline-item">
       <h3>{{ item.role }}</h3>
-      <p>{{ item.dates }}</p>
-      <p>{{ item.location }}</p>
+      <p class="timeline-dates">{{ item.dates }}</p>
+      <p class="timeline-location">{{ item.location }}</p>
+
+      {% if item.description %}
+        <p class="timeline-description">{{ item.description }}</p>
+      {% endif %}
     </div>
-    {% endfor %}
-  </div>
+  {% endfor %}
+</div>
+
 
   <div class="experience-section">
     <h2>Education</h2>

@@ -13,29 +13,27 @@ summary: >
   I care about clean structure, long term maintainability, and solutions that scale without becoming fragile. My goal is simple: reduce friction, eliminate human error, and make systems feel effortless to use.
 
 sys_admin_skills:
+  - name: "Automation and Workflow Engineering"
+    percentage: "95%"
 
-name: "Automation and Workflow Engineering"
-percentage: "95%"
+  - name: "Identity and Access Management"
+    percentage: "90%"
 
-name: "Identity and Access Management"
-percentage: "90%"
+  - name: "SaaS Administration and Integrations"
+    percentage: "90%"
 
-name: "SaaS Administration and Integrations"
-percentage: "90%"
-
-name: "IT Operations and Support Systems"
-percentage: "85%"
+  - name: "IT Operations and Support Systems"
+    percentage: "85%"
 
 other_skills:
+  - name: "Cloud Platforms and Services"
+    percentage: "60%"
 
-name: "Cloud Platforms and Services"
-percentage: "60%"
+  - name: "Networking Fundamentals"
+    percentage: "60%"
 
-name: "Networking Fundamentals"
-percentage: "60%"
-
-name: "Scripting and Tooling"
-percentage: "70%"
+  - name: "Scripting and Tooling"
+    percentage: "70%"
 
 experience:
   - role: "Metacore – IT Specialist (Automation Focus)"
