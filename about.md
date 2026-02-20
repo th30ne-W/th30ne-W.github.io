@@ -5,7 +5,7 @@ display_title: About Me
 permalink: /about/
 description: Learn more about William Nunes, Workplace Automation Engineer
 greeting: "Hi, I am William Nunes."
-summary: >
+summary: |
   I work at the intersection of IT Operations and Engineering, building automation that replaces manual processes with reliable systems. My background in hands on IT gives me a practical perspective on how tools behave in real production environments.
 
   Today I focus on identity, device management, internal tooling, and workflow automation. Most of my work lives between platforms, stitching services together so they operate as a single, dependable system.
@@ -36,8 +36,13 @@ other_skills:
     percentage: "70%"
 
 experience:
-  - role: "Metacore – IT Specialist (Automation Focus)"
-    dates: "Oct 2024 – Present"
+  - role: "LI.FI – Workplace Automation Engineer"
+    dates: "Feb 2025 – Present"
+    location: "Berlin, Germany"
+    description: "Responsible for connecting internal tools and platforms through automation, building integrations that unify disparate systems into streamlined workflows. Focused on bridging the gaps between SaaS services, identity providers, and internal tooling to eliminate manual handoffs and ensure data flows reliably across the organization."
+
+  - role: "Metacore – IT Specialist"
+    dates: "Oct 2024 – Jan 2025"
     location: "Berlin, Germany"
     description: "Owning IT operations for the Berlin office while leading identity and access management through Okta. Driving onboarding and offboarding automation, platform integrations, and cross system workflows that reduce manual effort and improve reliability. Acting as the bridge between daily operations and automation driven improvements."
 

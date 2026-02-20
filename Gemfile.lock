@@ -45,6 +45,7 @@ GEM
     listen (3.9.0)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
+    logger (1.7.0)
     mercenary (0.3.6)
     pathutil (0.16.2)
       forwardable-extended (~> 2.6)
@@ -71,6 +72,7 @@ DEPENDENCIES
   bigdecimal
   jekyll (~> 3.9)
   kramdown-parser-gfm
+  logger
 
 BUNDLED WITH
-   2.7.2
+  4.0.6

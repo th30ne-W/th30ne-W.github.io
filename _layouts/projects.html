@@ -1,27 +1,32 @@
 ---
 layout: default
 ---
-<div class="projects-container">
-  <h1 class="page-title glow-title">Projects</h1>
+<section class="projects">
+    <div class="content-panel">
+        <h1 class="section-title">Projects</h1>
 
-  <div class="projects-grid">
-    {% for project in site.data.projects %}
-    <div class="project-bubble">
-      <div class="project-header">
-        <h2 class="project-title">{{ project.title }}</h2>
-      </div>
-
-      <div class="project-body">
-        <p class="project-description">{{ project.description }}</p>
-      </div>
-
-      <div class="project-footer">
-        <p class="project-tags">{{ project.tags }}</p>
-        {% if project.url %}
-        <a href="{{ project.url }}" class="project-link" target="_blank">View Project</a>
-        {% endif %}
-      </div>
+        <div class="projects__bubbles">
+            {% for project in site.data.projects %}
+            <article class="bubble">
+                <div class="bubble__inner">
+                    <h2 class="bubble__title">{{ project.title }}</h2>
+                    <p class="bubble__desc">{{ project.description }}</p>
+                    {% assign tags = project.tags | split: ' ' %}
+                    <ul class="bubble__tags" aria-label="Project tags">
+                        {% for tag in tags %}
+                            {% if tag != '' %}
+                            <li>{{ tag }}</li>
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                    {% if project.url %}
+                    <a href="{{ project.url }}" class="bubble__link" target="_blank" rel="noopener noreferrer">
+                        View Project &rarr;
+                    </a>
+                    {% endif %}
+                </div>
+            </article>
+            {% endfor %}
+        </div>
     </div>
-    {% endfor %}
-  </div>
-</div>
+</section>
