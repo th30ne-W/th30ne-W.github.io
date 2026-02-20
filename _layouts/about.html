@@ -1,62 +1,86 @@
 ---
 layout: default
 ---
-<section class="about-section">
-  <div class="about-intro">
-    <h1 class="glow-title">{{ page.title }}</h1>
-    {% if page.greeting %}
-    <p>{{ page.greeting }}</p>
-    {% endif %}
-    {% if page.summary %}
-    <p>{{ page.summary }}</p>
-    {% endif %}
-  </div>
+<article class="about">
+    <div class="content-panel">
+        <header class="about__intro">
+            <h1 class="section-title">{{ page.display_title | default: page.title }}</h1>
+            {% if page.greeting %}
+            <p class="about__greeting">{{ page.greeting }}</p>
+            {% endif %}
+            {% if page.summary %}
+            <div class="about__summary">{{ page.summary | markdownify }}</div>
+            {% endif %}
+        </header>
 
-  <div class="skills-container">
-    <div class="skills-section">
-      <h2>Sys Admin Skills</h2>
-      <ul>
-        {% for skill in page.sys_admin_skills %}
-        <li>{{ skill.name }}<span class="skill-bar" data-percentage="{{ skill.percentage }}"></span></li>
-        {% endfor %}
-      </ul>
+        <div class="skills-grid">
+            <section class="skills-panel" aria-labelledby="sys-admin-skills">
+                <h2 id="sys-admin-skills">Core Skills</h2>
+                <ul class="skills-list">
+                    {% for skill in page.sys_admin_skills %}
+                    <li>
+                        <div class="skill-label">
+                            <span class="skill-name">{{ skill.name }}</span>
+                            <span class="skill-pct">{{ skill.percentage }}</span>
+                        </div>
+                        <div class="skill-track">
+                            <span class="skill-bar" data-percentage="{{ skill.percentage }}" role="progressbar" aria-valuenow="{{ skill.percentage | remove: '%' }}" aria-valuemin="0" aria-valuemax="100" aria-label="{{ skill.name }}"></span>
+                        </div>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </section>
+            <section class="skills-panel" aria-labelledby="other-skills">
+                <h2 id="other-skills">Additional Skills</h2>
+                <ul class="skills-list">
+                    {% for skill in page.other_skills %}
+                    <li>
+                        <div class="skill-label">
+                            <span class="skill-name">{{ skill.name }}</span>
+                            <span class="skill-pct">{{ skill.percentage }}</span>
+                        </div>
+                        <div class="skill-track">
+                            <span class="skill-bar" data-percentage="{{ skill.percentage }}" role="progressbar" aria-valuenow="{{ skill.percentage | remove: '%' }}" aria-valuemin="0" aria-valuemax="100" aria-label="{{ skill.name }}"></span>
+                        </div>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </section>
+        </div>
+
+        <section class="timeline" aria-labelledby="experience-heading">
+            <h2 id="experience-heading" class="timeline__heading">Experience</h2>
+            <ol class="timeline__list">
+                {% for item in page.experience %}
+                <li class="timeline__item">
+                    <h3 class="timeline__role">{{ item.role }}</h3>
+                    <div class="timeline__meta">
+                        <time>{{ item.dates }}</time>
+                        <span class="timeline__location">{{ item.location }}</span>
+                    </div>
+                    {% if item.description %}
+                    <p class="timeline__desc">{{ item.description }}</p>
+                    {% endif %}
+                </li>
+                {% endfor %}
+            </ol>
+        </section>
+
+        <section class="timeline" aria-labelledby="education-heading">
+            <h2 id="education-heading" class="timeline__heading">Education</h2>
+            <ol class="timeline__list">
+                {% for item in page.education %}
+                <li class="timeline__item">
+                    <h3 class="timeline__role">{{ item.school }}</h3>
+                    <div class="timeline__meta">
+                        <time>{{ item.dates }}</time>
+                    </div>
+                    {% if item.detail %}
+                    <p class="timeline__desc">{{ item.detail }}</p>
+                    {% endif %}
+                </li>
+                {% endfor %}
+            </ol>
+        </section>
     </div>
-    <div class="other-skills-section">
-      <h2>Other Skills</h2>
-      <ul>
-        {% for skill in page.other_skills %}
-        <li>{{ skill.name }}<span class="skill-bar" data-percentage="{{ skill.percentage }}"></span></li>
-        {% endfor %}
-      </ul>
-    </div>
-  </div>
-
-  <div class="experience-section">
-  <h2>Experience</h2>
-  {% for item in page.experience %}
-    <div class="timeline-item">
-      <h3>{{ item.role }}</h3>
-      <p class="timeline-dates">{{ item.dates }}</p>
-      <p class="timeline-location">{{ item.location }}</p>
-
-      {% if item.description %}
-        <p class="timeline-description">{{ item.description }}</p>
-      {% endif %}
-    </div>
-  {% endfor %}
-</div>
-
-
-  <div class="experience-section">
-    <h2>Education</h2>
-    {% for item in page.education %}
-    <div class="timeline-item">
-      <h3>{{ item.school }}</h3>
-      <p>{{ item.dates }}</p>
-      {% if item.detail %}
-      <p>{{ item.detail }}</p>
-      {% endif %}
-    </div>
-    {% endfor %}
-  </div>
-</section>
+</article>

@@ -1,229 +1,384 @@
+const root = document.documentElement;
 const canvas = document.getElementById('background-animation');
-const ctx = canvas.getContext('2d');
+const ctx = canvas ? canvas.getContext('2d') : null;
 
-// Matrix rain characters
 const chars =
-  'アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    'アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 const charArray = chars.split('');
 
-// Rain settings
-const fontSize = 22;
-let columns = 0;
-let drops = [];
-let intervalId = null;
-
-// Hover interaction
-let mouseX = -1000;
-let mouseY = -1000;
-let mouseActive = false;
-let lastMouseMove = 0;
-const hoverRadius = 140;
-const openRadius = 160;
-const hoverFadeMs = 800;
-
-// Theme-aware matrix colors
 const matrixColors = {
-  fade: 'rgba(0, 0, 0, 0.1)',
-  base: '#afa',
-  hover: '#B2FF59',
-  glow: 'rgba(0, 255, 138, 0.35)',
+    fade: 'rgba(8, 10, 14, 0.2)',
+    base: '#00ff00',
+    hover: '#B2FF59',
+    glow: 'rgba(0, 255, 0, 0.42)',
 };
 
-function initMatrix() {
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-  columns = Math.floor(canvas.width / (fontSize * 0.6));
-  drops = Array.from({ length: columns }, () => Math.random() * -100);
+const matrixState = {
+    fontSize: 20,
+    columns: 0,
+    drops: [],
+    pointerX: -9999,
+    pointerY: -9999,
+    pointerActive: false,
+    lastPointerMove: 0,
+    hoverRadius: 130,
+    openRadius: 160,
+    hoverFadeMs: 700,
+    rafId: null,
+    running: false,
+    lastFrameTs: 0,
+    frameInterval: 1000 / 20,
+};
+
+function updateMatrixThemeColors() {
+    const styles = getComputedStyle(root);
+    matrixColors.fade = (styles.getPropertyValue('--matrix-fade') || matrixColors.fade).trim();
+    matrixColors.base = (styles.getPropertyValue('--matrix-char') || matrixColors.base).trim();
+    matrixColors.hover = (styles.getPropertyValue('--matrix-char-hover') || matrixColors.hover).trim();
+    matrixColors.glow = (styles.getPropertyValue('--matrix-shadow') || matrixColors.glow).trim();
 }
 
-function drawMatrix() {
-  ctx.fillStyle = matrixColors.fade;
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
+function saveMatrixState() {
+    try {
+        sessionStorage.setItem('matrixDrops', JSON.stringify(matrixState.drops));
+        if (canvas) {
+            sessionStorage.setItem('matrixSnapshot', canvas.toDataURL('image/png'));
+            sessionStorage.setItem('matrixSize', JSON.stringify({
+                w: canvas.clientWidth,
+                h: canvas.clientHeight,
+            }));
+        }
+    } catch (e) {
+        // Ignore storage failures (quota, private mode, etc.).
+    }
+}
 
-  ctx.font = `bold ${fontSize}px monospace`;
-  ctx.textBaseline = 'top';
+function loadMatrixDrops(columns) {
+    try {
+        const saved = sessionStorage.getItem('matrixDrops');
+        if (saved) {
+            const parsed = JSON.parse(saved);
+            if (Array.isArray(parsed) && parsed.length > 0) {
+                // Adapt to current column count: reuse what fits, fill the rest randomly.
+                return Array.from({ length: columns }, (_, i) =>
+                    i < parsed.length ? parsed[i] : Math.random() * -120
+                );
+            }
+        }
+    } catch (e) {
+        // Ignore parse/storage failures.
+    }
+    return null;
+}
 
-  for (let i = 0; i < drops.length; i++) {
-    const char = charArray[Math.floor(Math.random() * charArray.length)];
-    const x = i * fontSize * 0.6;
-    const y = drops[i] * fontSize;
+function restoreCanvasSnapshot() {
+    if (!canvas || !ctx) return false;
+    try {
+        const dataUrl = sessionStorage.getItem('matrixSnapshot');
+        const sizeJson = sessionStorage.getItem('matrixSize');
+        if (!dataUrl || !sizeJson) return false;
 
-    const now = performance.now();
-    const isHot = mouseActive && now - lastMouseMove < hoverFadeMs;
-    const dist = Math.hypot(x - mouseX, y - mouseY);
+        const size = JSON.parse(sizeJson);
+        // Only restore if the viewport size hasn't changed significantly.
+        if (Math.abs(size.w - window.innerWidth) > 2 || Math.abs(size.h - window.innerHeight) > 2) {
+            return false;
+        }
 
-    // brighten near pointer
-    ctx.fillStyle = dist < hoverRadius && isHot ? matrixColors.hover : matrixColors.base;
-    ctx.shadowColor = matrixColors.glow;
-    ctx.shadowBlur = 6;
-    ctx.fillText(char, x, y);
-    ctx.shadowBlur = 0;
+        const img = new Image();
+        img.onload = () => {
+            ctx.drawImage(img, 0, 0, canvas.clientWidth, canvas.clientHeight);
+        };
+        img.src = dataUrl;
+        return true;
+    } catch (e) {
+        return false;
+    }
+}
 
-    // create a simple "opening" effect by pushing drops away from pointer
-    if (isHot && dist < openRadius) {
-      const push = (openRadius - dist) / openRadius; // 0..1
-      drops[i] += 0.2 + push * 0.4; // temporarily accelerate away
+function initMatrix() {
+    if (!canvas || !ctx) {
+        return;
     }
 
-    if (y > canvas.height && Math.random() > 0.975) {
-      drops[i] = 0;
+    const dpr = window.devicePixelRatio || 1;
+    const width = Math.ceil(window.innerWidth);
+    const height = Math.ceil(window.innerHeight);
+
+    canvas.width = Math.floor(width * dpr);
+    canvas.height = Math.floor(height * dpr);
+    canvas.style.width = `${width}px`;
+    canvas.style.height = `${height}px`;
+
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+    matrixState.columns = Math.floor(width / (matrixState.fontSize * 0.72));
+
+    const restored = loadMatrixDrops(matrixState.columns);
+    matrixState.drops = restored || Array.from({ length: matrixState.columns }, () => Math.random() * -120);
+
+    // Paint the saved snapshot immediately so there is no blank flash.
+    if (restored) {
+        restoreCanvasSnapshot();
     }
-    drops[i]++;
-  }
+}
+
+function drawMatrixFrame(timestamp) {
+    if (!canvas || !ctx || !matrixState.running) {
+        return;
+    }
+
+    if (timestamp - matrixState.lastFrameTs < matrixState.frameInterval) {
+        matrixState.rafId = window.requestAnimationFrame(drawMatrixFrame);
+        return;
+    }
+    matrixState.lastFrameTs = timestamp;
+
+    ctx.fillStyle = matrixColors.fade;
+    ctx.fillRect(0, 0, canvas.clientWidth, canvas.clientHeight);
+
+    ctx.font = `600 ${matrixState.fontSize}px monospace`;
+    ctx.textBaseline = 'top';
+
+    const isHot = matrixState.pointerActive && timestamp - matrixState.lastPointerMove < matrixState.hoverFadeMs;
+
+    for (let i = 0; i < matrixState.drops.length; i += 1) {
+        const x = i * matrixState.fontSize * 0.72;
+        const y = matrixState.drops[i] * matrixState.fontSize;
+        const char = charArray[Math.floor(Math.random() * charArray.length)];
+        const dist = Math.hypot(x - matrixState.pointerX, y - matrixState.pointerY);
+
+        ctx.fillStyle = isHot && dist < matrixState.hoverRadius ? matrixColors.hover : matrixColors.base;
+        ctx.shadowColor = matrixColors.glow;
+        ctx.shadowBlur = 6;
+        ctx.fillText(char, x, y);
+        ctx.shadowBlur = 0;
+
+        if (isHot && dist < matrixState.openRadius) {
+            const push = (matrixState.openRadius - dist) / matrixState.openRadius;
+            matrixState.drops[i] += 0.13 + push * 0.33;
+        }
+
+        if (y > canvas.clientHeight && Math.random() > 0.975) {
+            matrixState.drops[i] = 0;
+        }
+
+        matrixState.drops[i] += 0.9;
+    }
+
+    matrixState.rafId = window.requestAnimationFrame(drawMatrixFrame);
 }
 
 function startMatrix() {
-  initMatrix();
-  if (intervalId) clearInterval(intervalId);
-  intervalId = setInterval(drawMatrix, 70);
+    if (!canvas || !ctx || matrixState.running) {
+        return;
+    }
+
+    matrixState.running = true;
+    matrixState.lastFrameTs = 0;
+    initMatrix();
+    matrixState.rafId = window.requestAnimationFrame(drawMatrixFrame);
 }
 
-function updateMatrixThemeColors() {
-  const styles = getComputedStyle(document.documentElement);
-  matrixColors.fade = (styles.getPropertyValue('--matrix-fade') || matrixColors.fade).trim();
-  matrixColors.base = (styles.getPropertyValue('--matrix-char') || matrixColors.base).trim();
-  matrixColors.hover = (styles.getPropertyValue('--matrix-char-hover') || matrixColors.hover).trim();
-  matrixColors.glow = (styles.getPropertyValue('--matrix-shadow') || matrixColors.glow).trim();
+function stopMatrix() {
+    matrixState.running = false;
+    if (matrixState.rafId) {
+        window.cancelAnimationFrame(matrixState.rafId);
+        matrixState.rafId = null;
+    }
 }
 
-window.addEventListener('resize', initMatrix);
-window.addEventListener('mousemove', (e) => {
-  mouseX = e.clientX;
-  mouseY = e.clientY;
-  mouseActive = true;
-  lastMouseMove = performance.now();
-});
-
-// Respect reduced motion preference
-const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
-if (!mediaQuery.matches) {
-  updateMatrixThemeColors();
-  startMatrix();
-}
-
-// Skill bars animation
 function initSkillBars() {
-  const skillBars = document.querySelectorAll('.skill-bar');
-  skillBars.forEach((bar) => {
-    const percentage = bar.getAttribute('data-percentage');
-    setTimeout(() => {
-      bar.style.width = percentage;
-    }, 500);
-  });
-}
-
-// SPA Navigation to persist background animation
-function initNavigation() {
-  document.addEventListener('click', (e) => {
-    const link = e.target.closest('a');
-    if (!link) return;
-
-    // Ignore external links, anchors, and special schemes
-    if (
-      link.origin !== window.location.origin ||
-      link.getAttribute('href').startsWith('#') ||
-      link.getAttribute('href').startsWith('mailto:') ||
-      link.target === '_blank'
-    ) {
-      return;
+    const skillBars = Array.from(document.querySelectorAll('.skill-bar'));
+    if (!skillBars.length) {
+        return;
     }
 
-    e.preventDefault();
-    navigateTo(link.href);
-  });
+    const animateBars = () => {
+        skillBars.forEach((bar) => {
+            const target = bar.getAttribute('data-percentage') || '0%';
+            bar.style.width = target;
+        });
+    };
 
-  window.addEventListener('popstate', () => {
-    navigateTo(window.location.href, false);
-  });
-}
-
-async function navigateTo(url, push = true) {
-  try {
-    const response = await fetch(url);
-    if (!response.ok) throw new Error('Network response was not ok');
-    const html = await response.text();
-    const parser = new DOMParser();
-    const doc = parser.parseFromString(html, 'text/html');
-
-    const newContent = doc.querySelector('.main-content');
-    const currentContent = document.querySelector('.main-content');
-
-    if (newContent && currentContent) {
-      currentContent.innerHTML = newContent.innerHTML;
-      document.title = doc.title;
-
-      if (push) {
-        history.pushState({}, '', url);
-      }
-
-      // Re-initialize page specific scripts
-      initSkillBars();
-      initThemeToggle();
-
-      // Scroll to top
-      window.scrollTo(0, 0);
-    } else {
-      // Fallback if structure is different
-      window.location.href = url;
+    if (!('IntersectionObserver' in window)) {
+        animateBars();
+        return;
     }
-  } catch (err) {
-    console.error('Navigation failed', err);
-    window.location.href = url;
-  }
-}
 
-function initThemeToggle() {
-  const themeToggle = document.getElementById('theme-toggle');
-  const root = document.documentElement;
+    const observer = new IntersectionObserver(
+        (entries) => {
+            const isVisible = entries.some((entry) => entry.isIntersecting);
+            if (!isVisible) {
+                return;
+            }
+            animateBars();
+            observer.disconnect();
+        },
+        {
+            threshold: 0.25,
+        }
+    );
 
-  function updateToggleLabel(theme) {
-    if (!themeToggle) return;
-    const isLight = theme === 'light';
-    themeToggle.setAttribute('aria-pressed', isLight);
-    const icon = themeToggle.querySelector('.theme-toggle__icon');
-    const label = themeToggle.querySelector('.theme-toggle__label');
-    if (icon) icon.textContent = isLight ? '☀' : '☾';
-    if (label) label.textContent = isLight ? 'Light' : 'Dark';
-  }
-
-  function applyTheme(theme) {
-    root.setAttribute('data-theme', theme);
-    try {
-      localStorage.setItem('theme', theme);
-    } catch (e) { /* ignore */ }
-    updateMatrixThemeColors();
-    updateToggleLabel(theme);
-    updateHeroImage(theme);
-  }
-
-  if (themeToggle) {
-    const current = root.getAttribute('data-theme') || 'dark';
-    updateToggleLabel(current);
-    updateHeroImage(current);
-    themeToggle.onclick = null;
-    themeToggle.addEventListener('click', () => {
-      const next = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
-      applyTheme(next);
-    });
-  } else {
-    updateMatrixThemeColors();
-    updateHeroImage(root.getAttribute('data-theme') || 'dark');
-  }
+    skillBars.forEach((bar) => observer.observe(bar));
 }
 
 function updateHeroImage(theme) {
-  const heroImg = document.getElementById('hero-photo');
-  if (!heroImg) return;
-  const lightSrc = heroImg.getAttribute('data-theme-image-light');
-  const darkSrc = heroImg.getAttribute('data-theme-image-dark');
-  const nextSrc = theme === 'light' ? lightSrc || heroImg.getAttribute('src') : darkSrc || heroImg.getAttribute('src');
-  if (nextSrc && heroImg.getAttribute('src') !== nextSrc) {
-    heroImg.setAttribute('src', nextSrc);
-  }
+    const heroImg = document.getElementById('hero-photo');
+    if (!heroImg) {
+        return;
+    }
+
+    const lightSrc = heroImg.getAttribute('data-theme-image-light');
+    const darkSrc = heroImg.getAttribute('data-theme-image-dark');
+    const currentSrc = heroImg.getAttribute('src');
+    const nextSrc = theme === 'light' ? lightSrc || currentSrc : darkSrc || currentSrc;
+
+    if (nextSrc && nextSrc !== currentSrc) {
+        heroImg.setAttribute('src', nextSrc);
+    }
 }
 
-document.addEventListener('DOMContentLoaded', function () {
-  initSkillBars();
-  initNavigation();
-  initThemeToggle();
+function initThemeToggle() {
+    const themeToggle = document.getElementById('theme-toggle');
+    if (!themeToggle) {
+        updateMatrixThemeColors();
+        return;
+    }
+
+    const icon = themeToggle.querySelector('.theme-toggle__icon');
+
+    const updateToggleLabel = (theme) => {
+        const isLight = theme === 'light';
+        themeToggle.setAttribute('aria-pressed', String(isLight));
+        if (icon) {
+            icon.textContent = isLight ? '☀' : '☾';
+        }
+    };
+
+    const applyTheme = (theme) => {
+        root.setAttribute('data-theme', theme);
+        try {
+            localStorage.setItem('theme', theme);
+        } catch (error) {
+            // Ignore storage failures in private modes.
+        }
+        updateToggleLabel(theme);
+        updateMatrixThemeColors();
+        updateHeroImage(theme);
+    };
+
+    const currentTheme = root.getAttribute('data-theme') || 'dark';
+    applyTheme(currentTheme);
+
+    themeToggle.addEventListener('click', () => {
+        const next = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+        applyTheme(next);
+    });
+}
+
+function initNavigationMenu() {
+    const navToggle = document.getElementById('nav-toggle');
+    const nav = document.getElementById('primary-nav');
+
+    if (!navToggle || !nav) {
+        return;
+    }
+
+    const closeMenu = () => {
+        nav.classList.remove('is-open');
+        navToggle.setAttribute('aria-expanded', 'false');
+    };
+
+    const toggleMenu = () => {
+        const isOpen = nav.classList.toggle('is-open');
+        navToggle.setAttribute('aria-expanded', String(isOpen));
+    };
+
+    navToggle.addEventListener('click', (event) => {
+        event.stopPropagation();
+        toggleMenu();
+    });
+
+    nav.addEventListener('click', (event) => {
+        const target = event.target;
+        if (target instanceof HTMLElement && target.closest('a')) {
+            closeMenu();
+        }
+    });
+
+    document.addEventListener('click', (event) => {
+        const target = event.target;
+        if (!(target instanceof Node)) {
+            return;
+        }
+
+        if (!nav.contains(target) && target !== navToggle) {
+            closeMenu();
+        }
+    });
+
+    document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') {
+            closeMenu();
+        }
+    });
+
+    window.addEventListener('resize', () => {
+        if (window.innerWidth > 768) {
+            closeMenu();
+        }
+    });
+}
+
+function initMatrixBehavior() {
+    if (!canvas || !ctx) {
+        return;
+    }
+
+    updateMatrixThemeColors();
+
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+    const updateMotionState = () => {
+        if (prefersReduced.matches || document.visibilityState === 'hidden') {
+            stopMatrix();
+            return;
+        }
+        startMatrix();
+    };
+
+    updateMotionState();
+
+    window.addEventListener('resize', initMatrix);
+
+    const handlePointer = (event) => {
+        matrixState.pointerX = event.clientX;
+        matrixState.pointerY = event.clientY;
+        matrixState.pointerActive = true;
+        matrixState.lastPointerMove = performance.now();
+    };
+
+    window.addEventListener('pointermove', handlePointer, { passive: true });
+
+    window.addEventListener('pointerleave', () => {
+        matrixState.pointerActive = false;
+    });
+
+    if (typeof prefersReduced.addEventListener === 'function') {
+        prefersReduced.addEventListener('change', updateMotionState);
+    } else {
+        prefersReduced.addListener(updateMotionState);
+    }
+
+    document.addEventListener('visibilitychange', updateMotionState);
+
+    // Persist drop positions across page navigations.
+    window.addEventListener('beforeunload', saveMatrixState);
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    initThemeToggle();
+    initNavigationMenu();
+    initSkillBars();
+    initMatrixBehavior();
 });
