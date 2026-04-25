@@ -1,9 +1,11 @@
 - title: Rick and Morty CLI
-  description: Python Command-line interface application that interacts with the Rick and Morty API and let's users to search for characters from the Rick and Morty series.
-  tags: "#Python #Automation #IT"
+  description: Python command-line tool for querying the Rick and Morty API from the terminal, with quick character lookup and readable results.
+  impact: Shows API integration, CLI interaction design, and packaging fundamentals in a small, inspectable automation project.
+  tags: "#Python #CLI #API #Automation"
   url: https://github.com/th30ne-W/Rude-Rick-CLI
 
-- title: Personal Page
-  description: This personal Page made in Static Jekyll 3.9 site served via GitHub Pages.
-  tags: "#Jekyll #HTML #SCSS #JS"
+- title: Personal Website
+  description: Static Jekyll portfolio site served through GitHub Pages, with custom Sass, theme persistence, and a lightweight canvas animation.
+  impact: Demonstrates content-driven layouts, responsive styling, accessible interaction patterns, and a maintainable static-site structure.
+  tags: "#Jekyll #SCSS #JavaScript #GitHubPages"
   url: https://github.com/th30ne-W/th30ne-W.github.io

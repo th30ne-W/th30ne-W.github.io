@@ -4,6 +4,9 @@ layout: default
 <section class="projects">
     <div class="content-panel">
         <h1 class="section-title">Projects</h1>
+        {% if page.description %}
+        <p class="section-intro">{{ page.description }}</p>
+        {% endif %}
 
         <div class="projects__bubbles">
             {% for project in site.data.projects %}
@@ -11,6 +14,9 @@ layout: default
                 <div class="bubble__inner">
                     <h2 class="bubble__title">{{ project.title }}</h2>
                     <p class="bubble__desc">{{ project.description }}</p>
+                    {% if project.impact %}
+                    <p class="bubble__impact"><span>Why it matters</span>{{ project.impact }}</p>
+                    {% endif %}
                     {% assign tags = project.tags | split: ' ' %}
                     <ul class="bubble__tags" aria-label="Project tags">
                         {% for tag in tags %}

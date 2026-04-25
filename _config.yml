@@ -2,7 +2,7 @@ title: William Nunes
 subtitle: Automating IT with Python
 email: will.nunes@proton.me
 description: Personal site for William Nunes showcasing automation-focused IT work.
-url: "https://th30ne-w.github.io"
+url: "https://williamnunes.com"
 baseurl: ""
 image: /assets/images/willmatrix.jpg
 markdown: kramdown
@@ -15,6 +15,9 @@ sass:
   load_paths:
     - _sass
 exclude:
+  - AGENTS.md
+  - .jekyll-metadata
+  - output
   - Gemfile
   - Gemfile.lock
   - node_modules

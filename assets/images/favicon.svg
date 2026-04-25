@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="William Nunes">
+  <rect width="64" height="64" rx="12" fill="#0d0d0d"/>
+  <path d="M12 18h7l5 22 6-22h6l6 22 5-22h7L45 48h-6l-6-21-6 21h-6L12 18Z" fill="#00ff00"/>
+  <path d="M13 52h38" stroke="#b2ff59" stroke-width="3" stroke-linecap="round"/>
+</svg>
