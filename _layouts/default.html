@@ -1,18 +1,36 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="dark">
 <head>
+    {% assign meta_title = page.title | default: site.title %}
+    {% if page.url == '/' %}
+        {% assign document_title = site.title %}
+    {% else %}
+        {% assign document_title = meta_title | append: ' | ' | append: site.title %}
+    {% endif %}
+    {% assign meta_description = page.description | default: site.description %}
+    {% assign meta_image = page.image | default: site.image %}
+    {% assign meta_url = page.url | absolute_url %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="{{ page.description | default: site.description }}">
+    <meta name="description" content="{{ meta_description | escape }}">
     <meta name="theme-color" content="#0d0d0d">
-    <meta property="og:title" content="{{ page.title }} | {{ site.title }}">
-    <meta property="og:description" content="{{ page.description | default: site.description }}">
+    <link rel="canonical" href="{{ meta_url }}">
+    <meta property="og:site_name" content="{{ site.title | escape }}">
+    <meta property="og:title" content="{{ document_title | escape }}">
+    <meta property="og:description" content="{{ meta_description | escape }}">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="{{ page.url | absolute_url }}">
+    <meta property="og:url" content="{{ meta_url }}">
+    <meta property="og:image" content="{{ meta_image | absolute_url }}">
+    <meta property="og:image:alt" content="{{ site.title | escape }} portfolio preview">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{ document_title | escape }}">
+    <meta name="twitter:description" content="{{ meta_description | escape }}">
+    <meta name="twitter:image" content="{{ meta_image | absolute_url }}">
+    <link rel="icon" href="{{ '/assets/images/favicon.svg' | relative_url }}" type="image/svg+xml">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
-    <title>{{ page.title }} | {{ site.title }}</title>
+    <title>{{ document_title }}</title>
     <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
     <script>
         (function () {

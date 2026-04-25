@@ -250,6 +250,7 @@ function initThemeToggle() {
     const updateToggleLabel = (theme) => {
         const isLight = theme === 'light';
         themeToggle.setAttribute('aria-pressed', String(isLight));
+        themeToggle.setAttribute('aria-label', isLight ? 'Switch to dark mode' : 'Switch to light mode');
         if (icon) {
             icon.textContent = isLight ? '☀' : '☾';
         }
