@@ -23,8 +23,8 @@ Personal site of William Nunes, Workplace Automation Engineer in Berlin: identit
   - Hero image references `/assets/images/...` plus optional light/dark variants via `data-theme-image-dark` and `data-theme-image-light` attributes.
   - Update the headline and tagline in the markdown body below the front matter.
 - About page (`about.md`):
-  - Front matter drives the page; update `greeting`, `summary`, `sys_admin_skills`, `other_skills`, `experience`, and `education`.
-  - Skill lists expect `name` and `percentage` strings; experience entries use `role`, `dates`, `location`; education uses `school`, `dates`, optional `detail`.
+  - The front matter is the CV: `greeting`, `summary`, `experience[] {company, role, dates, location, highlights[]}`, `earlier_roles[] {company, role, dates}`, `skills[] {group, items[]}`, `education[] {school, degree, dates}`, `languages[] {name, level}`, optional `certifications[] {name, issuer, year}`.
+  - `@media print` in `main.scss` turns the page into a black-on-white CV ("Print / Save as PDF" button).
 - Projects page (`_data/projects.yml`):
   - Cards render from this YAML file, not from `projects.md`.
   - Example entry:

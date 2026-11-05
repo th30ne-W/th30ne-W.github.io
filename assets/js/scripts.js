@@ -151,39 +151,12 @@ function stopMatrix() {
     }
 }
 
-function initSkillBars() {
-    const skillBars = Array.from(document.querySelectorAll('.skill-bar'));
-    if (!skillBars.length) {
+function initPrintButton() {
+    const printButton = document.querySelector('.print-cv');
+    if (!printButton) {
         return;
     }
-
-    const animateBars = () => {
-        skillBars.forEach((bar) => {
-            const target = bar.getAttribute('data-percentage') || '0%';
-            bar.style.width = target;
-        });
-    };
-
-    if (!('IntersectionObserver' in window)) {
-        animateBars();
-        return;
-    }
-
-    const observer = new IntersectionObserver(
-        (entries) => {
-            const isVisible = entries.some((entry) => entry.isIntersecting);
-            if (!isVisible) {
-                return;
-            }
-            animateBars();
-            observer.disconnect();
-        },
-        {
-            threshold: 0.25,
-        }
-    );
-
-    skillBars.forEach((bar) => observer.observe(bar));
+    printButton.addEventListener('click', () => window.print());
 }
 
 function updateHeroImage(theme) {
@@ -354,6 +327,6 @@ function initMatrixBehavior() {
 document.addEventListener('DOMContentLoaded', () => {
     initThemeToggle();
     initNavigationMenu();
-    initSkillBars();
+    initPrintButton();
     initMatrixBehavior();
 });
