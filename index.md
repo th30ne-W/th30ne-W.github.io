@@ -1,10 +1,10 @@
 ---
 layout: home
 permalink: /
-description: Personal site for William Nunes showcasing automation-focused IT work.
+description: "William Nunes — Workplace Automation Engineer in Berlin: identity and access, workflow automation and AI agents for the modern workplace."
 ---
 
-# <span class="glow-title">William Nunes</span>
+# William Nunes
 
 <img
   id="hero-photo"
@@ -15,17 +15,17 @@ description: Personal site for William Nunes showcasing automation-focused IT wo
   width="200"
   height="200">
 
-## Building the bridge between IT Operations and Engineering.
+## Identity, automation and AI agents for the modern workplace.
 
-Automating identity, infrastructure, and internal workflows at scale
+Workplace Automation Engineer in Berlin. I build the identity layer, the lifecycle automation and the AI agents that keep a fast-moving company running without manual handoffs.
 
 <div class="hero__actions" aria-label="Primary actions">
-  <a class="hero__link hero__link--primary" href="{{ '/projects/' | relative_url }}">View Projects</a>
-  <a class="hero__link hero__link--secondary" href="mailto:{{ site.email }}">Contact</a>
+  <a class="hero__link hero__link--primary" href="{{ '/projects/' | relative_url }}">View projects</a>
+  <a class="hero__link hero__link--secondary" href="{{ '/about/' | relative_url }}">About me</a>
 </div>
 
 <ul class="hero__highlights" aria-label="Focus areas">
-  <li>Identity Automation</li>
-  <li>SaaS Integrations</li>
-  <li>Internal Tooling</li>
+  <li>Identity &amp; Access</li>
+  <li>Workflow Automation</li>
+  <li>AI Agents</li>
 </ul>
