@@ -30,9 +30,15 @@ Personal site for William Nunes showcasing automation-focused IT work. Static Je
   - Example entry:
     ```yaml
     - title: My Project
+      kind: app            # app (badge "macOS app", links) or private (badge "Private repo", no links)
       description: What it does
+      impact: Why it matters
       tags: "#Python #Automation"
-      url: https://github.com/th30ne-W/my-project
+      image: /assets/images/projects/my-project.png   # optional, 256×256
+      image_alt: My Project app icon
+      links:
+        - label: Source
+          url: https://github.com/th30ne-W/my-project
     ```
 - Shared chrome:
   - `_includes/header.html` and `_includes/footer.html` for nav/footer tweaks.
