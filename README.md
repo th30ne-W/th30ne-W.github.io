@@ -1,6 +1,6 @@
 # th30ne-W.github.io
 
-Personal site for William Nunes showcasing automation-focused IT work. Static Jekyll 3.9 site served via GitHub Pages.
+Personal site for William Nunes showcasing automation-focused IT work. Static Jekyll 4.4 site deployed to GitHub Pages.
 
 ## Requirements
 - Ruby 3.4 (see `.ruby-version`) with Bundler
@@ -17,9 +17,9 @@ Personal site for William Nunes showcasing automation-focused IT work. Static Je
 - Run before pushing to catch Liquid/front matter errors
 
 ## Content and Data
-- Site meta: `_config.yml` controls `title`, `subtitle`, `description`, `url`, `baseurl`, and nav labels under `nav`.
+- Site meta: `_config.yml` controls `title`, `tagline`, `description`, `url`, `baseurl`, the default social `image`, and nav labels under `nav`. Page `<title>`, canonical, Open Graph and Twitter tags come from `jekyll-seo-tag`.
 - Home page (`index.md`):
-  - Front matter uses `layout: home`, `title`, `description`, `image`.
+  - Front matter uses `layout: home`, `description`, `image` (no `title`, so the browser title becomes `title | tagline`).
   - Hero image references `/assets/images/...` plus optional light/dark variants via `data-theme-image-dark` and `data-theme-image-light` attributes.
   - Update the headline and tagline in the markdown body below the front matter.
 - About page (`about.md`):
@@ -51,7 +51,7 @@ Personal site for William Nunes showcasing automation-focused IT work. Static Je
 - `vendor/`: local Bundler install directory, gitignored.
 
 ## Contribution and Conventions
-- Run all commands with `bundle exec` to use the pinned Jekyll 3.9 toolchain.
+- Run all commands with `bundle exec` to use the pinned Jekyll 4.4 toolchain.
 - Follow conventional commits (e.g., `feat: ...`, `fix: ...`).
 
 ## Troubleshooting

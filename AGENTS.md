@@ -11,7 +11,7 @@ bundle install                       # Install Ruby/Jekyll deps into vendor/bund
 bundle exec jekyll serve --livereload --incremental  # Local dev at http://127.0.0.1:4000
 bundle exec jekyll build              # Production build to _site/
 ```
-Use Bundler (`bundle exec ...`) so the pinned Jekyll 3.9 toolchain stays consistent.
+Use Bundler (`bundle exec ...`) so the pinned Jekyll 4.4 toolchain stays consistent.
 
 ## Coding Style & Naming Conventions
 - HTML/Liquid: 4-space indentation; keep includes lean and reusable. Prefer include tags (e.g., `{% raw %}{% include header.html %}{% endraw %}`) or data files over repeated markup.
