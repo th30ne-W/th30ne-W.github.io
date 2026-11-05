@@ -1,0 +1,2 @@
+# CI-only override: canonical and absolute URLs resolve against the locally served build.
+url: "http://localhost:9000"
