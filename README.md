@@ -3,12 +3,12 @@
 Personal site for William Nunes showcasing automation-focused IT work. Static Jekyll 3.9 site served via GitHub Pages.
 
 ## Requirements
-- Ruby 2.7+ with Bundler
+- Ruby 3.4 (see `.ruby-version`) with Bundler
 - No Node toolchain; Jekyll handles Sass/Markdown
-- Install gems into `vendor/bundle` for GitHub Pages parity
+- Gems install locally into `vendor/bundle` (gitignored)
 
 ## Quickstart
-1. bundle install --path vendor/bundle
+1. bundle install (`.bundle/config` sets the path to `vendor/bundle`)
 2. bundle exec jekyll serve --livereload --incremental
 3. Browse http://127.0.0.1:4000 and edit content; the server rebuilds on change
 
@@ -48,11 +48,10 @@ Personal site for William Nunes showcasing automation-focused IT work. Static Je
 - `_data/projects.yml`: project data source.
 - `_layouts/`: page templates; `_includes/`: shared components.
 - `assets/css/main.scss`: primary styles; `assets/js/scripts.js`: client scripts.
-- `vendor/`: Bundler vendor directory committed for GitHub Pages compatibility.
+- `vendor/`: local Bundler install directory, gitignored.
 
 ## Contribution and Conventions
 - Run all commands with `bundle exec` to use the pinned Jekyll 3.9 toolchain.
-- Avoid manual edits in `vendor/`; let Bundler manage dependencies.
 - Follow conventional commits (e.g., `feat: ...`, `fix: ...`).
 
 ## Troubleshooting
