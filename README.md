@@ -1,6 +1,6 @@
 # th30ne-W.github.io
 
-Personal site for William Nunes showcasing automation-focused IT work. Static Jekyll 4.4 site deployed to GitHub Pages.
+Personal site of William Nunes, Workplace Automation Engineer in Berlin: identity and access, workflow automation and AI agents. Static Jekyll 4.4 site deployed to GitHub Pages.
 
 ## Requirements
 - Ruby 3.4 (see `.ruby-version`) with Bundler
