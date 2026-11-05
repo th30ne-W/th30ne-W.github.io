@@ -18,10 +18,12 @@ jobs:
         uses: treosh/lighthouse-ci-action@v12
         with:
           configPath: .lighthouserc.json
+          temporaryPublicStorage: true
       - name: Lighthouse (desktop)
         uses: treosh/lighthouse-ci-action@v12
         with:
           configPath: .lighthouserc.desktop.json
+          temporaryPublicStorage: true
       - name: Check links
         uses: lycheeverse/lychee-action@v2
         with:
