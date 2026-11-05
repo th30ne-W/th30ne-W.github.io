@@ -12,8 +12,8 @@ description: Personal site for William Nunes showcasing automation-focused IT wo
   data-theme-image-dark="/assets/images/willmatrix.jpg"
   data-theme-image-light="/assets/images/willmatrixlight-512.jpg"
   alt="William Nunes – Workplace Automation Engineer"
-  width="280"
-  height="280">
+  width="200"
+  height="200">
 
 ## Building the bridge between IT Operations and Engineering.
 

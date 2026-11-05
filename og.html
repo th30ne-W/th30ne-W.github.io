@@ -1,0 +1,87 @@
+---
+layout: none
+permalink: /og/
+sitemap: false
+---
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="robots" content="noindex">
+    <title>Social preview source</title>
+    <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
+    <style>
+        body {
+            width: 1200px;
+            height: 630px;
+            min-height: 0;
+            margin: 0;
+            overflow: hidden;
+            background:
+                radial-gradient(circle at 28% 50%, rgba(0, 255, 0, 0.10), transparent 45%),
+                var(--c-bg);
+        }
+
+        .og {
+            box-sizing: border-box;
+            width: 1200px;
+            height: 630px;
+            display: flex;
+            align-items: center;
+            gap: 72px;
+            padding: 0 96px;
+            border: 1px solid var(--c-panel-border);
+        }
+
+        .og__photo {
+            flex: none;
+            width: 340px;
+            height: 340px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--c-primary);
+            box-shadow: var(--glow-hero);
+        }
+
+        .og__name {
+            margin: 0 0 24px;
+            font-family: var(--f-heading);
+            font-weight: 700;
+            font-size: 64px;
+            line-height: 1.1;
+            letter-spacing: 0.04em;
+            color: var(--c-primary);
+            text-shadow: var(--glow-md);
+        }
+
+        .og__role {
+            margin: 0;
+            font-family: var(--f-body);
+            font-weight: 500;
+            font-size: 30px;
+            line-height: 1.4;
+            color: var(--c-text-muted);
+        }
+
+        .og__url {
+            margin: 40px 0 0;
+            font-family: var(--f-heading);
+            font-weight: 500;
+            font-size: 22px;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--c-accent);
+        }
+    </style>
+</head>
+<body>
+    <div class="og">
+        <img class="og__photo" src="{{ '/assets/images/willmatrix.jpg' | relative_url }}" alt="" width="340" height="340">
+        <div>
+            <p class="og__name">William Nunes</p>
+            <p class="og__role">Workplace Automation Engineer · Berlin</p>
+            <p class="og__url">williamnunes.com</p>
+        </div>
+    </div>
+</body>
+</html>

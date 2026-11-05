@@ -5,10 +5,10 @@ description: Personal site for William Nunes showcasing automation-focused IT wo
 url: "https://williamnunes.com"
 baseurl: ""
 image:
-  path: /assets/images/willmatrix.jpg
+  path: /assets/images/og-default.jpg
   alt: "William Nunes — Workplace Automation Engineer"
-  width: 765
-  height: 1024
+  width: 1200
+  height: 630
 twitter:
   card: summary_large_image
 markdown: kramdown
@@ -35,10 +35,10 @@ defaults:
     values:
       layout: default
       image:
-        path: /assets/images/willmatrix.jpg
+        path: /assets/images/og-default.jpg
         alt: "William Nunes — Workplace Automation Engineer"
-        width: 765
-        height: 1024
+        width: 1200
+        height: 630
 plugins:
   - jekyll-seo-tag
   - jekyll-sitemap
