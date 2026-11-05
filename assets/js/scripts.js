@@ -41,13 +41,6 @@ function updateMatrixThemeColors() {
 function saveMatrixState() {
     try {
         sessionStorage.setItem('matrixDrops', JSON.stringify(matrixState.drops));
-        if (canvas) {
-            sessionStorage.setItem('matrixSnapshot', canvas.toDataURL('image/png'));
-            sessionStorage.setItem('matrixSize', JSON.stringify({
-                w: canvas.clientWidth,
-                h: canvas.clientHeight,
-            }));
-        }
     } catch (e) {
         // Ignore storage failures (quota, private mode, etc.).
     }
@@ -71,30 +64,6 @@ function loadMatrixDrops(columns) {
     return null;
 }
 
-function restoreCanvasSnapshot() {
-    if (!canvas || !ctx) return false;
-    try {
-        const dataUrl = sessionStorage.getItem('matrixSnapshot');
-        const sizeJson = sessionStorage.getItem('matrixSize');
-        if (!dataUrl || !sizeJson) return false;
-
-        const size = JSON.parse(sizeJson);
-        // Only restore if the viewport size hasn't changed significantly.
-        if (Math.abs(size.w - window.innerWidth) > 2 || Math.abs(size.h - window.innerHeight) > 2) {
-            return false;
-        }
-
-        const img = new Image();
-        img.onload = () => {
-            ctx.drawImage(img, 0, 0, canvas.clientWidth, canvas.clientHeight);
-        };
-        img.src = dataUrl;
-        return true;
-    } catch (e) {
-        return false;
-    }
-}
-
 function initMatrix() {
     if (!canvas || !ctx) {
         return;
@@ -115,11 +84,6 @@ function initMatrix() {
 
     const restored = loadMatrixDrops(matrixState.columns);
     matrixState.drops = restored || Array.from({ length: matrixState.columns }, () => Math.random() * -120);
-
-    // Paint the saved snapshot immediately so there is no blank flash.
-    if (restored) {
-        restoreCanvasSnapshot();
-    }
 }
 
 function drawMatrixFrame(timestamp) {
@@ -258,6 +222,10 @@ function initThemeToggle() {
 
     const applyTheme = (theme) => {
         root.setAttribute('data-theme', theme);
+        const themeColorMeta = document.querySelector('meta[name="theme-color"]');
+        if (themeColorMeta) {
+            themeColorMeta.content = theme === 'light' ? '#eef2f1' : '#0d0d0d';
+        }
         try {
             localStorage.setItem('theme', theme);
         } catch (error) {
@@ -361,7 +329,13 @@ function initMatrixBehavior() {
 
     window.addEventListener('pointermove', handlePointer, { passive: true });
 
-    window.addEventListener('pointerleave', () => {
+    document.addEventListener('pointerout', (event) => {
+        if (event.relatedTarget === null) {
+            matrixState.pointerActive = false;
+        }
+    }, { passive: true });
+
+    window.addEventListener('blur', () => {
         matrixState.pointerActive = false;
     });
 
@@ -374,7 +348,7 @@ function initMatrixBehavior() {
     document.addEventListener('visibilitychange', updateMotionState);
 
     // Persist drop positions across page navigations.
-    window.addEventListener('beforeunload', saveMatrixState);
+    window.addEventListener('pagehide', saveMatrixState);
 }
 
 document.addEventListener('DOMContentLoaded', () => {
