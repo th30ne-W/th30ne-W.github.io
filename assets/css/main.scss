@@ -847,6 +847,70 @@ button:focus-visible {
 }
 
 
+/* ── OG image source (/og/) ─────────────────────────────── */
+body.og-page {
+    width: 1200px;
+    height: 630px;
+    min-height: 0;
+    margin: 0;
+    overflow: hidden;
+    background:
+        radial-gradient(circle at 28% 50%, rgba(0, 255, 0, 0.10), transparent 45%),
+        var(--c-bg);
+}
+
+.og-page .og {
+    box-sizing: border-box;
+    width: 1200px;
+    height: 630px;
+    display: flex;
+    align-items: center;
+    gap: 72px;
+    padding: 0 96px;
+    border: 1px solid var(--c-panel-border);
+}
+
+.og-page .og__photo {
+    flex: none;
+    width: 340px;
+    height: 340px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--c-primary);
+    box-shadow: var(--glow-hero);
+}
+
+.og-page .og__name {
+    margin: 0 0 24px;
+    font-family: var(--f-heading);
+    font-weight: 700;
+    font-size: 64px;
+    line-height: 1.1;
+    letter-spacing: 0.04em;
+    color: var(--c-primary);
+    text-shadow: var(--glow-md);
+}
+
+.og-page .og__role {
+    margin: 0;
+    font-family: var(--f-body);
+    font-weight: 500;
+    font-size: 30px;
+    line-height: 1.4;
+    color: var(--c-text-muted);
+}
+
+.og-page .og__url {
+    margin: 40px 0 0;
+    font-family: var(--f-heading);
+    font-weight: 500;
+    font-size: 22px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--c-accent);
+}
+
+
 /* ── Responsive ─────────────────────────────────────────── */
 @media (max-width: 768px) {
     #content {
