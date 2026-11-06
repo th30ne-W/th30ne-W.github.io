@@ -9,8 +9,6 @@ image:
   alt: "William Nunes — Workplace Automation Engineer"
   width: 1200
   height: 630
-twitter:
-  card: summary_large_image
 markdown: kramdown
 permalink: pretty
 sass:
