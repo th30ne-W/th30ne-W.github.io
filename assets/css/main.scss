@@ -852,14 +852,16 @@ button:focus-visible {
     -webkit-backdrop-filter: blur(12px);
 }
 
-.site-footer__links {
+.site-footer__links,
+.site-footer__legal {
     display: flex;
     justify-content: center;
     gap: var(--s-6);
     margin-bottom: var(--s-3);
 }
 
-.site-footer__links a {
+.site-footer__links a,
+.site-footer__legal a {
     font-family: var(--f-heading);
     font-size: 0.75rem;
     letter-spacing: 0.12em;
@@ -867,7 +869,8 @@ button:focus-visible {
     color: var(--c-text-muted);
 }
 
-.site-footer__links a:hover {
+.site-footer__links a:hover,
+.site-footer__legal a:hover {
     color: var(--c-primary);
 }
 
@@ -875,6 +878,20 @@ button:focus-visible {
     font-size: 0.75rem;
     color: var(--c-text-faint);
     margin: 0;
+}
+
+.legal h2 {
+    margin-top: var(--s-6);
+    color: var(--c-primary);
+}
+
+.legal p {
+    color: var(--c-text-muted);
+}
+
+.legal p a {
+    text-decoration: underline;
+    text-underline-offset: 0.15em;
 }
 
 
