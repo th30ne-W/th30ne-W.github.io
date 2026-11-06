@@ -1,7 +1,7 @@
 ---
 layout: home
 permalink: /
-description: "William Nunes — Workplace Automation Engineer in Berlin: identity and access, workflow automation and AI agents for the modern workplace."
+description: "William Nunes builds AI agents, workflow automation and the secure foundations they run on, turning manual operations into software that runs in production."
 ---
 
 # William Nunes
@@ -15,9 +15,9 @@ description: "William Nunes — Workplace Automation Engineer in Berlin: identit
   width="200"
   height="200">
 
-## Identity, automation and AI agents for the modern workplace.
+## Where AI agents meet real work.
 
-Workplace Automation Engineer in Berlin. I build the identity layer, the lifecycle automation and the AI agents that keep a fast-moving company running without manual handoffs.
+I turn manual, repetitive operations into software: autonomous agents, automated workflows and the secure foundations they run on. Shipped to production, not left in slides.
 
 <div class="hero__actions" aria-label="Primary actions">
   <a class="hero__link hero__link--primary" href="{{ '/projects/' | relative_url }}">View projects</a>
@@ -25,7 +25,7 @@ Workplace Automation Engineer in Berlin. I build the identity layer, the lifecyc
 </div>
 
 <ul class="hero__highlights" aria-label="Focus areas">
-  <li>Identity &amp; Access</li>
-  <li>Workflow Automation</li>
   <li>AI Agents</li>
+  <li>Workflow Automation</li>
+  <li>Secure by Design</li>
 </ul>
