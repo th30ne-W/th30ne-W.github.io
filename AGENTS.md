@@ -7,7 +7,7 @@
 
 ## Build, Test, and Development Commands
 ```sh
-bundle install --path vendor/bundle   # Install Ruby/Jekyll deps locally
+bundle install                       # Install Ruby/Jekyll deps into vendor/bundle (set in .bundle/config)
 bundle exec jekyll serve --livereload --incremental  # Local dev at http://127.0.0.1:4000
 bundle exec jekyll build              # Production build to _site/
 ```
@@ -30,4 +30,4 @@ Use Bundler (`bundle exec ...`) so the pinned Jekyll 3.9 toolchain stays consist
 
 ## Security & Configuration Tips
 - Do not commit secrets or API keys; this site is static and public. Custom domain is set via `CNAME`; keep `url`/`baseurl` in `_config.yml` aligned with deployment.
-- Vendor directory is committed for GitHub Pages compatibility; avoid manual edits; let Bundler manage it.
+- `vendor/` is gitignored; let Bundler manage it.
