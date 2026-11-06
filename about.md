@@ -6,7 +6,7 @@ permalink: /about/
 description: "CV of William Nunes, Workplace Automation Engineer in Berlin: identity and access, lifecycle automation, AI agents and workplace IT."
 greeting: "Hi, I am William Nunes."
 summary: |
-  Workplace Automation Engineer in Berlin. I own identity and access, joiner and leaver automation and workplace IT, and I build and run the internal automations and AI agents that remove manual work from People, Finance and Legal teams.
+  I turn operations into software. I design the identity foundation, the workflows on top of it and the AI agents that now handle work teams used to do by hand — shipped with CI, evals and infrastructure as code, so they stay trustworthy at scale.
 
 experience:
   - company: "LI.FI"
