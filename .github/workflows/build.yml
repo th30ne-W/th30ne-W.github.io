@@ -1,7 +1,6 @@
 name: Build Jekyll site
 
 on:
-  push:
   pull_request:
 
 jobs:
