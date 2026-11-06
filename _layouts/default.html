@@ -27,9 +27,8 @@
     <meta name="twitter:description" content="{{ meta_description | escape }}">
     <meta name="twitter:image" content="{{ meta_image | absolute_url }}">
     <link rel="icon" href="{{ '/assets/images/favicon.svg' | relative_url }}" type="image/svg+xml">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="preload" href="{{ '/assets/fonts/open-sans-400.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="{{ '/assets/fonts/orbitron-700.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
     <title>{{ document_title }}</title>
     <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
     <script>
