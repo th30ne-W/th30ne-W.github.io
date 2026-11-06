@@ -37,6 +37,7 @@
             try {
                 var t = localStorage.getItem('theme') || 'dark';
                 document.documentElement.setAttribute('data-theme', t);
+                document.querySelector('meta[name="theme-color"]').content = t === 'light' ? '#eef2f1' : '#0d0d0d';
             } catch (e) {}
         })();
     </script>
