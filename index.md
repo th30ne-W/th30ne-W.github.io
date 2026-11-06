@@ -1,6 +1,5 @@
 ---
 layout: home
-title: Home
 permalink: /
 description: Personal site for William Nunes showcasing automation-focused IT work.
 ---

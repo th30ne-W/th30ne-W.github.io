@@ -1,19 +1,20 @@
 title: William Nunes
-subtitle: Automating IT with Python
+tagline: Automating IT with Python
 email: will.nunes@proton.me
 description: Personal site for William Nunes showcasing automation-focused IT work.
 url: "https://williamnunes.com"
 baseurl: ""
-image: /assets/images/willmatrix.jpg
+image:
+  path: /assets/images/willmatrix.jpg
+  alt: "William Nunes — Workplace Automation Engineer"
+  width: 765
+  height: 1024
+twitter:
+  card: summary_large_image
 markdown: kramdown
 permalink: pretty
-collections:
-  posts:
-    output: true
 sass:
   style: expanded
-  load_paths:
-    - _sass
 exclude:
   - AGENTS.md
   - .jekyll-metadata
@@ -33,13 +34,14 @@ defaults:
       type: "pages"
     values:
       layout: default
-      image: /assets/images/willmatrix.jpg
-  - scope:
-      path: ""
-      type: "posts"
-    values:
-      layout: default
-plugins: []
+      image:
+        path: /assets/images/willmatrix.jpg
+        alt: "William Nunes — Workplace Automation Engineer"
+        width: 765
+        height: 1024
+plugins:
+  - jekyll-seo-tag
+  - jekyll-sitemap
 nav:
   - title: Home
     url: /
