@@ -10,9 +10,17 @@ layout: default
 
         <div class="projects__bubbles">
             {% for project in site.data.projects %}
-            <article class="bubble">
+            <article class="bubble bubble--{{ project.kind }}">
                 <div class="bubble__inner">
-                    <h2 class="bubble__title">{{ project.title }}</h2>
+                    <div class="bubble__head">
+                        {% if project.image %}
+                        <img class="bubble__icon" src="{{ project.image | relative_url }}" width="64" height="64" loading="lazy" alt="{{ project.image_alt }}">
+                        {% endif %}
+                        <div>
+                            <span class="bubble__badge">{% if project.kind == 'app' %}macOS app{% else %}Private repo{% endif %}</span>
+                            <h2 class="bubble__title">{{ project.title }}</h2>
+                        </div>
+                    </div>
                     <p class="bubble__desc">{{ project.description }}</p>
                     {% if project.impact %}
                     <p class="bubble__impact"><span>Why it matters</span>{{ project.impact }}</p>
@@ -25,10 +33,12 @@ layout: default
                             {% endif %}
                         {% endfor %}
                     </ul>
-                    {% if project.url %}
-                    <a href="{{ project.url }}" class="bubble__link" target="_blank" rel="noopener noreferrer">
-                        View Project &rarr;
-                    </a>
+                    {% if project.kind != 'private' and project.links %}
+                    <div class="bubble__actions">
+                        {% for link in project.links %}
+                        <a href="{{ link.url }}" class="bubble__link" target="_blank" rel="noopener noreferrer">{{ link.label }}<span class="visually-hidden"> {{ project.title }} (opens in a new tab)</span></a>
+                        {% endfor %}
+                    </div>
                     {% endif %}
                 </div>
             </article>

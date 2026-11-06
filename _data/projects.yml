@@ -1,11 +1,37 @@
-- title: Rick and Morty CLI
-  description: Python command-line tool for querying the Rick and Morty API from the terminal, with quick character lookup and readable results.
-  impact: Shows API integration, CLI interaction design, and packaging fundamentals in a small, inspectable automation project.
-  tags: "#Python #CLI #API #Automation"
-  url: https://github.com/th30ne-W/Rude-Rick-CLI
+- title: DockStay
+  kind: app
+  description: Menu-bar macOS app that keeps the Dock pinned to the display you choose and recovers automatically after sleep, display changes or disconnects.
+  impact: Fixes a real multi-monitor annoyance natively in Swift, with a universal build and a CI release pipeline that verifies architectures and the code signature.
+  tags: "#Swift #SwiftUI #macOS #CI"
+  image: /assets/images/projects/dockstay.png
+  image_alt: DockStay app icon
+  links:
+    - label: Download
+      url: https://github.com/th30ne-W/DockStay/releases/latest
+    - label: Source
+      url: https://github.com/th30ne-W/DockStay
 
-- title: Personal Website
-  description: Static Jekyll portfolio site served through GitHub Pages, with custom Sass, theme persistence, and a lightweight canvas animation.
-  impact: Demonstrates content-driven layouts, responsive styling, accessible interaction patterns, and a maintainable static-site structure.
-  tags: "#Jekyll #SCSS #JavaScript #GitHubPages"
-  url: https://github.com/th30ne-W/th30ne-W.github.io
+- title: Nude Notes
+  kind: app
+  description: "Translucent menu-bar Markdown notes for macOS: global shortcut, multi-window notes, pinning, search and auto-save to plain files."
+  impact: A shipped cross-stack desktop app — Rust backend, React front end, tests on both sides — delivered end to end with a downloadable release.
+  tags: "#Tauri #Rust #React #TypeScript #macOS"
+  image: /assets/images/projects/nude-notes.png
+  image_alt: Nude Notes app icon
+  links:
+    - label: Download
+      url: https://github.com/th30ne-W/Nude-Notes/releases/latest
+    - label: Source
+      url: https://github.com/th30ne-W/Nude-Notes
+
+- title: Laya Computer Use
+  kind: private
+  description: Local macOS computer-use agent in which every action decision comes from an on-device Apple Silicon model, paired with capture tooling and an offline evaluation harness that scores decision strategies.
+  impact: Applies measured, repeatable evaluation to desktop automation instead of guesswork.
+  tags: "#Python #macOS #MLX #AI #Automation"
+
+- title: Homelab
+  kind: private
+  description: "Single-node Proxmox lab running n8n, Home Assistant and an AI agent, managed with Ansible: snapshot-guarded weekly updates, generated state snapshots, ADRs and runbooks."
+  impact: "Operations discipline at home: reversible changes, documented decisions and tested automation."
+  tags: "#Proxmox #Ansible #n8n #HomeAssistant #Runbooks"
