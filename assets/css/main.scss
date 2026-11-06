@@ -698,74 +698,68 @@ button:focus-visible {
     margin-bottom: var(--s-3);
 }
 
+.print-cv {
+    display: inline-flex;
+    align-items: center;
+    min-height: 42px;
+    margin-top: var(--s-3);
+    padding: var(--s-2) var(--s-4);
+    border: 1px solid var(--c-primary);
+    border-radius: var(--radius);
+    background: var(--c-primary-tint);
+    color: var(--c-primary);
+    font-family: var(--f-heading);
+    font-size: 0.8rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.3s var(--ease), color 0.3s var(--ease);
+}
+
+.print-cv:hover {
+    background: var(--c-primary);
+    color: var(--c-on-primary);
+}
+
 
 /* ── Skills ─────────────────────────────────────────────── */
-.skills-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
-    gap: var(--s-5);
+.skills {
     margin-bottom: var(--s-8);
 }
 
-.skills-panel {
+.skills__groups {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+    gap: var(--s-5);
+}
+
+.skill-group {
     background: var(--c-surface);
     border: 1px solid var(--c-border);
     border-radius: var(--radius);
     padding: var(--s-5);
 }
 
-.skills-panel h2 {
-    color: var(--c-primary);
-    font-size: 1rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    margin-bottom: var(--s-5);
+.skill-group__title {
+    margin-bottom: var(--s-3);
+    color: var(--c-text);
 }
 
-.skills-list {
+.tags {
     list-style: none;
     margin: 0;
     padding: 0;
     display: flex;
-    flex-direction: column;
-    gap: var(--s-4);
+    flex-wrap: wrap;
+    gap: var(--s-2);
 }
 
-.skill-label {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    margin-bottom: var(--s-2);
-}
-
-.skill-name {
-    font-size: 0.85rem;
-    color: var(--c-text);
-}
-
-.skill-pct {
-    font-family: var(--f-heading);
-    font-size: 0.7rem;
-    color: var(--c-meta);
-    letter-spacing: 0.04em;
-}
-
-.skill-track {
-    width: 100%;
-    height: 6px;
-    background: var(--c-border);
-    border-radius: 3px;
-    overflow: hidden;
-}
-
-.skill-bar {
-    display: block;
-    height: 100%;
-    width: 0;
-    border-radius: 3px;
-    background: linear-gradient(90deg, var(--c-primary-dim), var(--c-primary));
-    box-shadow: var(--glow-sm);
-    transition: width 1s var(--ease);
+.tags li {
+    padding: var(--s-1) var(--s-3);
+    border: 1px solid var(--c-border-accent);
+    border-radius: var(--radius);
+    color: var(--c-text-muted);
+    font-size: 0.875rem;
 }
 
 
@@ -832,11 +826,52 @@ button:focus-visible {
     margin-right: var(--s-3);
 }
 
-.timeline__desc {
-    color: var(--c-text-muted);
-    font-size: 1rem;
-    line-height: 1.65;
+.timeline__company {
+    margin: 0 0 var(--s-1);
+    color: var(--c-primary);
+    font-weight: 600;
+}
+
+.timeline__highlights {
     margin: 0;
+    padding-left: var(--s-5);
+    color: var(--c-text-muted);
+    line-height: 1.65;
+}
+
+.timeline__highlights li + li {
+    margin-top: var(--s-2);
+}
+
+.timeline__earlier {
+    margin: var(--s-6) 0 0;
+    color: var(--c-text-muted);
+}
+
+.timeline__earlier-label {
+    display: block;
+    margin-bottom: var(--s-1);
+    color: var(--c-meta);
+    font-family: var(--f-heading);
+    font-size: 0.75rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+.languages {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--s-3) var(--s-6);
+    color: var(--c-text-muted);
+}
+
+.languages strong {
+    color: var(--c-text);
+    font-weight: 600;
+    margin-right: var(--s-1);
 }
 
 
@@ -1114,5 +1149,141 @@ body.og-page {
 
     #background-animation {
         display: none;
+    }
+}
+
+
+/* ── Print (About as CV) ────────────────────────────────── */
+@media print {
+    @page {
+        margin: 16mm;
+    }
+
+    #background-animation,
+    .site-header,
+    .site-footer,
+    .skip-link,
+    .print-cv {
+        display: none !important;
+    }
+
+    *,
+    *::before,
+    *::after {
+        text-shadow: none !important;
+        box-shadow: none !important;
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+    }
+
+    html,
+    html[data-theme] {
+        --c-primary: #111;
+        --c-accent: #111;
+        --c-text: #111;
+        --c-text-muted: #222;
+        --c-text-faint: #333;
+        --c-meta: #444;
+        --c-border: #999;
+        --c-border-accent: #999;
+        --c-surface: transparent;
+        --c-panel: transparent;
+        --c-panel-border: transparent;
+        font-size: 9.5pt;
+    }
+
+    body {
+        display: block;
+        min-height: 0;
+        background: #fff;
+        color: #111;
+        line-height: 1.45;
+    }
+
+    #content {
+        max-width: none;
+        padding: 0;
+    }
+
+    .content-panel {
+        border: 0;
+        padding: 0;
+    }
+
+    .about__intro {
+        margin-bottom: 4mm;
+        padding-bottom: 3mm;
+    }
+
+    .about__intro .section-title {
+        margin-bottom: 1mm;
+        font-size: 18pt;
+    }
+
+    .about__greeting,
+    .about__summary p {
+        margin-bottom: 1mm;
+        line-height: 1.45;
+    }
+
+    h2.timeline__heading {
+        margin-bottom: 2mm;
+        font-size: 12pt;
+    }
+
+    .timeline,
+    .skills {
+        margin-bottom: 4mm;
+    }
+
+    .timeline__item {
+        padding-bottom: 2.5mm;
+        break-inside: avoid;
+    }
+
+    .timeline__role {
+        margin-bottom: 0.5mm;
+        font-size: 10.5pt;
+    }
+
+    .timeline__meta {
+        margin-bottom: 1mm;
+    }
+
+    .timeline__highlights {
+        line-height: 1.4;
+    }
+
+    .timeline__highlights li + li {
+        margin-top: 0.5mm;
+    }
+
+    .timeline__earlier {
+        margin-top: 2mm;
+    }
+
+    .skills__groups {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2mm;
+    }
+
+    .skill-group {
+        padding: 2mm;
+        break-inside: avoid;
+    }
+
+    .skill-group__title {
+        margin-bottom: 1mm;
+        font-size: 10pt;
+    }
+
+    .tags li {
+        padding: 0 1.5mm;
+        font-size: 8.5pt;
+    }
+
+    h2,
+    h3 {
+        break-after: avoid;
     }
 }
